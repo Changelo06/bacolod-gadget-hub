@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Smartphone, Laptop, Tablet, Headphones, Watch, Recycle, MapPin, CreditCard, Wallet, Banknote, ShieldCheck } from "lucide-react";
+import { ArrowRight, Smartphone, Laptop, Tablet, Headphones, Monitor, Tv, MapPin, CreditCard, Wallet, Banknote, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 
 const CATEGORIES = [
-  { icon: Smartphone, label: "iPhone", q: "iphone OR smartphone" },
-  { icon: Laptop, label: "Mac", q: "macbook OR laptop" },
-  { icon: Tablet, label: "iPad", q: "ipad OR tablet" },
-  { icon: Watch, label: "Watch", q: "watch" },
-  { icon: Headphones, label: "Audio", q: "airpods OR headphone" },
-  { icon: Recycle, label: "CPO", q: "cpo OR pre-owned" },
+  { icon: Smartphone, label: "Phones", q: "phone" },
+  { icon: Laptop, label: "Laptops", q: "laptop" },
+  { icon: Tablet, label: "Tablets", q: "tablet" },
+  { icon: Monitor, label: "Monitors", q: "monitor" },
+  { icon: Tv, label: "TVs", q: "tv" },
+  { icon: Headphones, label: "Accessories", q: "accessory OR accessories" },
 ];
 
 const BRANCHES = [
@@ -187,7 +187,7 @@ export const EmptyProducts = () => (
   <div className="text-center py-20 rounded-3xl bg-secondary/60">
     <p className="text-lg font-semibold mb-2">No products yet</p>
     <p className="text-muted-foreground text-sm">
-      Tell the chat what to add — e.g. "iPhone 15 Pro · ₱65,000".
+      Add your first product to see it featured here.
     </p>
   </div>
 );

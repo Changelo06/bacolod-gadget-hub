@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 
 const PROMOS = [
   { tag: "Limited", title: "0% Installment up to 12 months", desc: "On select smartphones and laptops via partner financing." },
-  { tag: "Bundle", title: "Free accessories with every iPhone", desc: "Case + screen protector + fast charger included." },
+  { tag: "Bundle", title: "Free accessories with every new phone", desc: "Case + screen protector + fast charger included." },
   { tag: "Trade-In", title: "Up to ₱20,000 trade-in credit", desc: "Upgrade your phone or laptop and save instantly." },
 ];
 
@@ -32,7 +32,7 @@ const BRANCHES = [
 const UPCOMING = [
   { date: "Q2 2026", title: "iWarehouse Iloilo", desc: "Crossing the strait — first branch outside Negros." },
   { date: "Coming Soon", title: "iWarehouse Service Hub", desc: "Dedicated repair & service center in Bacolod." },
-  { date: "New Arrivals", title: "Latest Apple lineup", desc: "Pre-order the newest iPhone, iPad, and Mac." },
+  { date: "New Arrivals", title: "Latest flagship lineup", desc: "Pre-order the newest phones, tablets, and laptops." },
 ];
 
 const PARTNERS = [

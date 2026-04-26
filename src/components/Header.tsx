@@ -117,7 +117,7 @@ const SearchBar = ({ onClose }: { onClose: () => void }) => {
           autoFocus
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search iPhone, MacBook, accessories…"
+          placeholder="Search phones, laptops, accessories…"
           className="h-12 text-base rounded-full border-border bg-secondary/60 px-5"
         />
       </form>
