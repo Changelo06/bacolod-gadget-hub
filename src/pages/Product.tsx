@@ -4,15 +4,11 @@ import { ChevronLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useProductByHandle } from "@/hooks/useProducts";
-import { useCartStore } from "@/stores/cartStore";
 import { formatPrice } from "@/lib/shopify";
-import { toast } from "sonner";
 
 const Product = () => {
   const { handle } = useParams<{ handle: string }>();
   const { data: product, isLoading } = useProductByHandle(handle);
-  const addItem = useCartStore((s) => s.addItem);
-  const cartLoading = useCartStore((s) => s.isLoading);
   const [activeImage, setActiveImage] = useState(0);
   const [variantId, setVariantId] = useState<string | null>(null);
 
