@@ -36,7 +36,7 @@ export const Header = () => {
         scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border" : "bg-background/60 backdrop-blur-md"
       }`}
     >
-      <div className="container flex h-14 items-center justify-between gap-4">
+      <div className="container flex h-[68px] items-center justify-between gap-4">
         <Logo />
 
         <nav className="hidden md:flex items-center gap-7">
