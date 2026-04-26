@@ -45,12 +45,24 @@ export const Header = () => {
       <div className="container flex h-[68px] items-center justify-between gap-4">
         <Logo />
 
-        <nav className="hidden md:flex items-center gap-7">
-          {NAV.map((item) => (
+        <nav className="hidden md:flex items-center gap-7 flex-1 justify-center">
+          {NAV_PRODUCTS.map((item) => (
             <Link
               key={item.label}
               to={item.to}
               className="text-[13px] font-medium text-foreground/80 hover:text-foreground transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <nav className="hidden md:flex items-center gap-5 mr-2">
+          {NAV_SERVICES.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
             >
               {item.label}
             </Link>
