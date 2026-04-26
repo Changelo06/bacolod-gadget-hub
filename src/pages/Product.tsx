@@ -38,18 +38,6 @@ const Product = () => {
   const images = product.images.edges;
   const image = images[activeImage]?.node ?? images[0]?.node;
 
-  const handleAdd = async () => {
-    if (!variant) return;
-    await addItem({
-      product: { node: product },
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    toast.success("Added to cart", { description: product.title, position: "top-center" });
-  };
 
   return (
     <div className="container py-10 md:py-14">
