@@ -14,16 +14,16 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
-        'gradient-mint': 'var(--gradient-mint)',
+        'gradient-dark': 'var(--gradient-dark)',
         'gradient-card': 'var(--gradient-card)',
       },
       boxShadow: {
-        glow: 'var(--shadow-glow)',
+        soft: 'var(--shadow-soft)',
         card: 'var(--shadow-card)',
       },
       colors: {

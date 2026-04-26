@@ -1,100 +1,98 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* iWarehouse design tokens — Neon Mint Tech */
+/* iWarehouse — Clean product-centric (Apple-inspired) */
 @layer base {
   :root {
     /* Surfaces */
-    --background: 210 53% 11%;          /* #0d1b2a deep navy */
-    --foreground: 160 30% 96%;          /* near-white mint tint */
+    --background: 0 0% 100%;            /* pure white */
+    --foreground: 0 0% 7%;              /* near-black */
 
-    --card: 210 50% 9%;
-    --card-foreground: 160 30% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 210 50% 9%;
-    --popover-foreground: 160 30% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 161 65% 50%;             /* #2dd4a8 mint */
-    --primary-foreground: 210 53% 11%;
+    --primary: 0 0% 7%;                 /* black primary */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 152 49% 19%;           /* #1b4332 forest */
-    --secondary-foreground: 160 30% 96%;
+    --secondary: 0 0% 96%;              /* light gray surfaces */
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 210 40% 15%;
-    --muted-foreground: 165 15% 70%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 148 100% 73%;             /* #73ffb8 neon highlight */
-    --accent-foreground: 210 53% 11%;
+    --accent: 22 96% 54%;               /* iWarehouse orange #f26722 */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 30% 20%;
-    --input: 210 30% 18%;
-    --ring: 161 65% 50%;
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 0 0% 7%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     /* Brand */
-    --brand-glow: 161 65% 50%;
-    --brand-highlight: 148 100% 73%;
-    --gradient-hero: linear-gradient(135deg, hsl(210 53% 11%) 0%, hsl(152 49% 14%) 60%, hsl(161 65% 18%) 100%);
-    --gradient-mint: linear-gradient(135deg, hsl(161 65% 50%), hsl(148 100% 73%));
-    --gradient-card: linear-gradient(180deg, hsl(210 40% 13%), hsl(210 50% 9%));
-    --shadow-glow: 0 0 40px -8px hsl(161 65% 50% / 0.45);
-    --shadow-card: 0 8px 30px -12px hsl(210 70% 4% / 0.6);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --brand-orange: 22 96% 54%;
+    --brand-black: 0 0% 7%;
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(0 0% 94%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 9%) 0%, hsl(0 0% 4%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 99%), hsl(0 0% 96%));
+    --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.04), 0 8px 24px -12px hsl(0 0% 0% / 0.08);
+    --shadow-soft: 0 20px 60px -20px hsl(0 0% 0% / 0.15);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Sidebar (unused but kept) */
-    --sidebar-background: 210 50% 9%;
-    --sidebar-foreground: 160 30% 96%;
-    --sidebar-primary: 161 65% 50%;
-    --sidebar-primary-foreground: 210 53% 11%;
-    --sidebar-accent: 210 40% 15%;
-    --sidebar-accent-foreground: 160 30% 96%;
-    --sidebar-border: 210 30% 20%;
-    --sidebar-ring: 161 65% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 0 0% 7%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 0 0% 91%;
+    --sidebar-ring: 22 96% 54%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  html {
-    @apply scroll-smooth;
-  }
+  * { @apply border-border; }
+  html { @apply scroll-smooth; }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    @apply tracking-tight;
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply tracking-tight font-semibold;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
-  .grid-pattern {
-    background-image:
-      linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px);
-    background-size: 48px 48px;
+  .text-orange {
+    color: hsl(var(--accent));
   }
-  .text-gradient-mint {
-    background: var(--gradient-mint);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .surface-dark {
+    background: hsl(0 0% 7%);
+    color: hsl(0 0% 98%);
   }
-  .glow-hover {
+  .surface-soft {
+    background: hsl(0 0% 96%);
+  }
+  .product-tile {
     transition: var(--transition-smooth);
   }
-  .glow-hover:hover {
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+  .product-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
   }
 }

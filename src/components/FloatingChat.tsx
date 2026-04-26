@@ -5,7 +5,7 @@ export const FloatingChat = () => (
     <a
       href="viber://chat?number=%2B639000000000"
       aria-label="Chat on Viber"
-      className="h-12 w-12 rounded-full bg-[#7360f2] hover:scale-110 transition-transform flex items-center justify-center shadow-glow"
+      className="h-12 w-12 rounded-full bg-[#7360f2] hover:scale-110 transition-transform flex items-center justify-center shadow-soft"
     >
       <MessageCircle className="h-5 w-5 text-white" />
     </a>
@@ -14,7 +14,7 @@ export const FloatingChat = () => (
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on Messenger"
-      className="h-12 w-12 rounded-full bg-[#0084ff] hover:scale-110 transition-transform flex items-center justify-center shadow-glow"
+      className="h-12 w-12 rounded-full bg-[#0084ff] hover:scale-110 transition-transform flex items-center justify-center shadow-soft"
     >
       <Facebook className="h-5 w-5 text-white" />
     </a>

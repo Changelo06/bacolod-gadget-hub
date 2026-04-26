@@ -30,8 +30,8 @@ const Shop = () => {
   return (
     <div className="container py-12 md:py-16">
       <header className="mb-8">
-        <h1 className="font-display text-4xl md:text-5xl font-bold">Shop</h1>
-        <p className="text-muted-foreground mt-2">Browse smartphones, laptops, tablets, accessories and more.</p>
+        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">Shop.</h1>
+        <p className="text-foreground/70 mt-2 text-lg">Smartphones, laptops, tablets, accessories and more.</p>
       </header>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -45,10 +45,10 @@ const Shop = () => {
             setParams(next, { replace: true });
           }}
           placeholder="Search products…"
-          className="h-11 max-w-md"
+          className="h-11 max-w-md rounded-full bg-secondary/60 px-5"
         />
         <Select value={sort} onValueChange={setSort}>
-          <SelectTrigger className="h-11 w-full sm:w-48">
+          <SelectTrigger className="h-11 w-full sm:w-48 rounded-full bg-secondary/60 px-5">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -63,7 +63,7 @@ const Shop = () => {
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="aspect-[3/4] rounded-xl bg-secondary/40 animate-pulse" />
+            <div key={i} className="aspect-[3/4] rounded-3xl bg-secondary/60 animate-pulse" />
           ))}
         </div>
       ) : sorted.length === 0 ? (

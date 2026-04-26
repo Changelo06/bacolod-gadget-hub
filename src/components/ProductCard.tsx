@@ -24,21 +24,21 @@ export const ProductCard = ({ product }: { product: ShopifyProduct }) => {
       quantity: 1,
       selectedOptions: variant.selectedOptions || [],
     });
-    toast.success("Added to cart", {
+    toast.success("Added to bag", {
       description: product.node.title,
       position: "top-center",
     });
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-border bg-gradient-card shadow-card glow-hover">
+    <div className="group product-tile rounded-3xl bg-secondary/60 overflow-hidden flex flex-col">
       <Link to={`/product/${product.node.handle}`} className="block">
-        <div className="aspect-square relative bg-secondary/30 overflow-hidden">
+        <div className="aspect-square relative overflow-hidden p-6">
           {image ? (
             <img
               src={image.url}
               alt={image.altText ?? product.node.title}
-              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
           ) : (
@@ -47,28 +47,28 @@ export const ProductCard = ({ product }: { product: ShopifyProduct }) => {
             </div>
           )}
           {isCPO && (
-            <Badge className="absolute top-3 left-3 bg-accent text-accent-foreground border-0 font-semibold">
+            <Badge className="absolute top-4 left-4 bg-accent text-accent-foreground border-0 font-semibold rounded-full px-3">
               CPO
             </Badge>
           )}
           {variant && !variant.availableForSale && (
-            <Badge variant="destructive" className="absolute top-3 right-3">Sold out</Badge>
+            <Badge variant="destructive" className="absolute top-4 right-4 rounded-full">Sold out</Badge>
           )}
         </div>
-        <div className="p-4 space-y-1">
-          <h3 className="font-display font-semibold text-base leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+      </Link>
+      <div className="px-6 pb-6 flex-1 flex flex-col">
+        <Link to={`/product/${product.node.handle}`} className="block">
+          <h3 className="font-semibold text-base leading-tight line-clamp-2 group-hover:text-accent transition-colors">
             {product.node.title}
           </h3>
-          <p className="text-lg font-bold text-primary">{formatPrice(price.amount, price.currencyCode)}</p>
-        </div>
-      </Link>
-      <div className="px-4 pb-4">
+          <p className="text-sm text-muted-foreground mt-1">From {formatPrice(price.amount, price.currencyCode)}</p>
+        </Link>
         <Button
           onClick={handleAdd}
           disabled={isLoading || !variant?.availableForSale}
-          className="w-full bg-gradient-mint text-primary-foreground hover:opacity-90 font-semibold"
+          className="mt-4 w-full bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full"
         >
-          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Cart"}
+          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Bag"}
         </Button>
       </div>
     </div>
