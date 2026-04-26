@@ -6,7 +6,7 @@ export const Logo = ({ variant = "dark" }: { variant?: "dark" | "light" }) => (
     <img
       src={logo}
       alt="iWarehouse"
-      className={`h-9 w-auto ${variant === "light" ? "" : "invert-[0.92]"} `}
+      className={`h-[50px] w-auto ${variant === "light" ? "" : "invert-[0.92]"} `}
       style={variant === "light" ? {} : { filter: "invert(1)" }}
     />
   </Link>

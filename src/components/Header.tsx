@@ -9,10 +9,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
 const NAV = [
-  { to: "/shop", label: "Shop" },
-  { to: "/shop?q=smartphone", label: "iPhone" },
-  { to: "/shop?q=laptop", label: "Mac" },
-  { to: "/shop?q=tablet", label: "iPad" },
+  { to: "/shop?q=phone", label: "Phones" },
+  { to: "/shop?q=laptop", label: "Laptops" },
+  { to: "/shop?q=pc OR desktop", label: "PCs" },
+  { to: "/shop?q=monitor", label: "Monitors" },
+  { to: "/shop?q=tv", label: "TVs" },
+  { to: "/shop?q=accessory OR accessories", label: "Accessories" },
   { to: "/cpo", label: "CPO" },
   { to: "/contact", label: "Support" },
 ];
