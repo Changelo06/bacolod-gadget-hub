@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
 const NAV = [
+  { to: "/store", label: "Store" },
   { to: "/shop?q=phone", label: "Phones" },
   { to: "/shop?q=laptop", label: "Laptops" },
   { to: "/shop?q=pc OR desktop", label: "PCs" },
