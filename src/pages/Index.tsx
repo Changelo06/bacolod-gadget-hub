@@ -187,7 +187,7 @@ export const EmptyProducts = () => (
   <div className="text-center py-20 rounded-3xl bg-secondary/60">
     <p className="text-lg font-semibold mb-2">No products yet</p>
     <p className="text-muted-foreground text-sm">
-      Tell the chat what to add — e.g. "iPhone 15 Pro · ₱65,000".
+      Add your first product to see it featured here.
     </p>
   </div>
 );
