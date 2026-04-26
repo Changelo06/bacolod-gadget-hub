@@ -46,86 +46,73 @@ const Contact = () => {
   return (
     <div className="container py-12 md:py-16">
       <header className="mb-10 max-w-2xl">
-        <h1 className="font-display text-4xl md:text-5xl font-bold">Get in touch</h1>
-        <p className="text-muted-foreground mt-3">
-          Visit us in Bacolod, drop a message, or chat with us on Messenger or Viber. We're here to help.
+        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">Get in touch.</h1>
+        <p className="text-foreground/70 mt-3 text-lg">
+          Visit a branch, send a message, or chat with us on Messenger or Viber.
         </p>
       </header>
 
-      <div className="grid lg:grid-cols-5 gap-10">
-        <div className="lg:col-span-3 p-8 rounded-2xl bg-gradient-card border border-border">
-          <h2 className="font-display text-2xl font-bold mb-6">Send a message</h2>
+      <div className="grid lg:grid-cols-5 gap-6">
+        <div className="lg:col-span-3 p-8 rounded-3xl bg-secondary/60">
+          <h2 className="text-2xl font-semibold mb-6">Send a message</h2>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" maxLength={100} className="mt-1.5 h-11" />
+              <Input id="name" name="name" maxLength={100} className="mt-1.5 h-11 rounded-xl bg-background" />
               {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" maxLength={255} className="mt-1.5 h-11" />
+              <Input id="email" name="email" type="email" maxLength={255} className="mt-1.5 h-11 rounded-xl bg-background" />
               {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
             </div>
             <div>
               <Label htmlFor="message">Message</Label>
-              <Textarea id="message" name="message" maxLength={1000} rows={5} className="mt-1.5" />
+              <Textarea id="message" name="message" maxLength={1000} rows={5} className="mt-1.5 rounded-xl bg-background" />
               {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
             </div>
-            <Button
-              type="submit"
-              disabled={submitting}
-              size="lg"
-              className="bg-gradient-mint text-primary-foreground hover:opacity-90 font-semibold"
-            >
+            <Button type="submit" disabled={submitting} size="lg"
+              className="bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full">
               {submitting ? "Sending…" : "Send Message"}
             </Button>
           </form>
         </div>
 
-        <div className="lg:col-span-2 space-y-4">
-          <InfoRow icon={MapPin} title="Visit our store" body="Bacolod City, Negros Occidental, Philippines" />
+        <div className="lg:col-span-2 space-y-3">
+          <InfoRow icon={MapPin} title="888 Mall, Bacolod" body="Plus Cadiz, La Carlota, Dumaguete & Kabankalan." />
           <InfoRow icon={Phone} title="Call us" body="+63 900 000 0000" />
           <InfoRow icon={Mail} title="Email" body="hello@iwarehouse.ph" />
           <InfoRow icon={Clock} title="Store hours" body="Mon–Sun · 9:00 AM – 8:00 PM" />
 
           <div className="grid grid-cols-2 gap-3 pt-2">
-            <a
-              href="https://m.me/iwarehousebacolod"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 h-11 rounded-lg bg-[#0084ff] hover:opacity-90 text-white font-medium text-sm transition-opacity"
-            >
+            <a href="https://m.me/iwarehousebacolod" target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 h-11 rounded-full bg-[#0084ff] hover:opacity-90 text-white font-medium text-sm transition-opacity">
               <Facebook className="h-4 w-4" /> Messenger
             </a>
-            <a
-              href="viber://chat?number=%2B639000000000"
-              className="flex items-center justify-center gap-2 h-11 rounded-lg bg-[#7360f2] hover:opacity-90 text-white font-medium text-sm transition-opacity"
-            >
+            <a href="viber://chat?number=%2B639000000000"
+              className="flex items-center justify-center gap-2 h-11 rounded-full bg-[#7360f2] hover:opacity-90 text-white font-medium text-sm transition-opacity">
               <MessageCircle className="h-4 w-4" /> Viber
             </a>
           </div>
         </div>
       </div>
 
-      <div className="mt-12 rounded-2xl overflow-hidden border border-border aspect-[16/7]">
-        <iframe
-          title="iWarehouse Bacolod location"
-          src="https://www.google.com/maps?q=Bacolod+City&output=embed"
-          className="w-full h-full"
-          loading="lazy"
-        />
+      <div className="mt-12 rounded-3xl overflow-hidden aspect-[16/7]">
+        <iframe title="iWarehouse Bacolod location"
+          src="https://www.google.com/maps?q=888+Mall+Bacolod&output=embed"
+          className="w-full h-full" loading="lazy" />
       </div>
     </div>
   );
 };
 
 const InfoRow = ({ icon: Icon, title, body }: { icon: React.ElementType; title: string; body: string }) => (
-  <div className="flex gap-3 p-5 rounded-xl bg-secondary/40 border border-border">
-    <div className="h-10 w-10 rounded-lg bg-primary/15 flex items-center justify-center shrink-0">
-      <Icon className="h-5 w-5 text-primary" />
+  <div className="flex gap-3 p-5 rounded-2xl bg-secondary/60">
+    <div className="h-10 w-10 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
+      <Icon className="h-5 w-5 text-accent" />
     </div>
     <div>
-      <p className="font-display font-semibold">{title}</p>
+      <p className="font-semibold">{title}</p>
       <p className="text-sm text-muted-foreground">{body}</p>
     </div>
   </div>
