@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Smartphone, Laptop, Tablet, Headphones, Watch, Recycle, MapPin, CreditCard, Wallet, Banknote, ShieldCheck } from "lucide-react";
+import { ArrowRight, Smartphone, Laptop, Tablet, Headphones, Monitor, Tv, Recycle, MapPin, CreditCard, Wallet, Banknote, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
