@@ -57,14 +57,14 @@ const Product = () => {
 
   return (
     <div className="container py-10 md:py-14">
-      <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary mb-6">
+      <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-accent mb-6">
         <ChevronLeft className="h-4 w-4" /> Back to shop
       </Link>
 
       <div className="grid lg:grid-cols-2 gap-10">
         <div className="space-y-3">
-          <div className="aspect-square rounded-xl overflow-hidden bg-secondary/30 border border-border">
-            {image && <img src={image.url} alt={image.altText ?? product.title} className="w-full h-full object-cover" />}
+          <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/60 p-6">
+            {image && <img src={image.url} alt={image.altText ?? product.title} className="w-full h-full object-contain" />}
           </div>
           {images.length > 1 && (
             <div className="grid grid-cols-5 gap-2">
@@ -72,9 +72,9 @@ const Product = () => {
                 <button
                   key={i}
                   onClick={() => setActiveImage(i)}
-                  className={`aspect-square rounded-md overflow-hidden border ${i === activeImage ? "border-primary" : "border-border"}`}
+                  className={`aspect-square rounded-xl overflow-hidden border-2 bg-secondary/60 p-2 ${i === activeImage ? "border-accent" : "border-transparent"}`}
                 >
-                  <img src={img.node.url} alt="" className="w-full h-full object-cover" />
+                  <img src={img.node.url} alt="" className="w-full h-full object-contain" />
                 </button>
               ))}
             </div>
@@ -83,8 +83,8 @@ const Product = () => {
 
         <div className="space-y-6">
           <div>
-            <h1 className="font-display text-3xl md:text-4xl font-bold">{product.title}</h1>
-            <p className="text-2xl font-bold text-primary mt-3">
+            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">{product.title}</h1>
+            <p className="text-2xl font-semibold mt-3">
               {variant ? formatPrice(variant.price.amount, variant.price.currencyCode) : ""}
             </p>
             {variant && !variant.availableForSale && <Badge variant="destructive" className="mt-2">Sold out</Badge>}
@@ -105,8 +105,8 @@ const Product = () => {
                         <button
                           key={v.node.id}
                           onClick={() => setVariantId(v.node.id)}
-                          className={`px-3 py-1.5 rounded-md border text-sm transition-colors ${
-                            isActive ? "border-primary bg-primary/15 text-primary" : "border-border hover:border-primary/50"
+                          className={`px-4 py-2 rounded-full border text-sm transition-colors ${
+                            isActive ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/50"
                           }`}
                         >
                           {so?.value}
@@ -121,15 +121,15 @@ const Product = () => {
             onClick={handleAdd}
             disabled={cartLoading || !variant?.availableForSale}
             size="lg"
-            className="w-full sm:w-auto bg-gradient-mint text-primary-foreground hover:opacity-90 font-semibold"
+            className="w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full px-8"
           >
-            {cartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Cart"}
+            {cartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Bag"}
           </Button>
 
           {product.description && (
             <div className="pt-6 border-t border-border">
-              <h2 className="font-display font-semibold mb-2">Description</h2>
-              <p className="text-muted-foreground whitespace-pre-line">{product.description}</p>
+              <h2 className="font-semibold mb-2">Description</h2>
+              <p className="text-muted-foreground whitespace-pre-line leading-relaxed">{product.description}</p>
             </div>
           )}
         </div>
