@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
-const NAV = [
+const NAV_PRODUCTS = [
   { to: "/store", label: "Store" },
   { to: "/shop?q=phone", label: "Phones" },
   { to: "/shop?q=laptop", label: "Laptops" },
@@ -16,9 +16,14 @@ const NAV = [
   { to: "/shop?q=monitor", label: "Monitors" },
   { to: "/shop?q=tv", label: "TVs" },
   { to: "/shop?q=accessory OR accessories", label: "Accessories" },
+];
+
+const NAV_SERVICES = [
   { to: "/cpo", label: "CPO" },
   { to: "/contact", label: "Support" },
 ];
+
+const NAV = [...NAV_PRODUCTS, ...NAV_SERVICES];
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
