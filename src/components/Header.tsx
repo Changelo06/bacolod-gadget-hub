@@ -79,7 +79,7 @@ export const Header = () => {
           >
             {searchOpen ? <X className="h-4 w-4" /> : <Search className="h-4 w-4" />}
           </Button>
-          <CartDrawer />
+          
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden h-9 w-9" aria-label="Menu">
