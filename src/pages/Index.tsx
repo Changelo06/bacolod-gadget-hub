@@ -5,12 +5,12 @@ import { ProductCard } from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 
 const CATEGORIES = [
-  { icon: Smartphone, label: "iPhone", q: "iphone OR smartphone" },
-  { icon: Laptop, label: "Mac", q: "macbook OR laptop" },
-  { icon: Tablet, label: "iPad", q: "ipad OR tablet" },
-  { icon: Watch, label: "Watch", q: "watch" },
-  { icon: Headphones, label: "Audio", q: "airpods OR headphone" },
-  { icon: Recycle, label: "CPO", q: "cpo OR pre-owned" },
+  { icon: Smartphone, label: "Phones", q: "phone" },
+  { icon: Laptop, label: "Laptops", q: "laptop" },
+  { icon: Tablet, label: "Tablets", q: "tablet" },
+  { icon: Monitor, label: "Monitors", q: "monitor" },
+  { icon: Tv, label: "TVs", q: "tv" },
+  { icon: Headphones, label: "Accessories", q: "accessory OR accessories" },
 ];
 
 const BRANCHES = [
