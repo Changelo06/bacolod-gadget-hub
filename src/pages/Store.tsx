@@ -32,7 +32,7 @@ const BRANCHES = [
 const UPCOMING = [
   { date: "Q2 2026", title: "iWarehouse Iloilo", desc: "Crossing the strait — first branch outside Negros." },
   { date: "Coming Soon", title: "iWarehouse Service Hub", desc: "Dedicated repair & service center in Bacolod." },
-  { date: "New Arrivals", title: "Latest Apple lineup", desc: "Pre-order the newest iPhone, iPad, and Mac." },
+  { date: "New Arrivals", title: "Latest flagship lineup", desc: "Pre-order the newest phones, tablets, and laptops." },
 ];
 
 const PARTNERS = [
