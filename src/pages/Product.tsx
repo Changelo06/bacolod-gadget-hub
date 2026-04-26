@@ -4,15 +4,11 @@ import { ChevronLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useProductByHandle } from "@/hooks/useProducts";
-import { useCartStore } from "@/stores/cartStore";
 import { formatPrice } from "@/lib/shopify";
-import { toast } from "sonner";
 
 const Product = () => {
   const { handle } = useParams<{ handle: string }>();
   const { data: product, isLoading } = useProductByHandle(handle);
-  const addItem = useCartStore((s) => s.addItem);
-  const cartLoading = useCartStore((s) => s.isLoading);
   const [activeImage, setActiveImage] = useState(0);
   const [variantId, setVariantId] = useState<string | null>(null);
 
@@ -42,18 +38,6 @@ const Product = () => {
   const images = product.images.edges;
   const image = images[activeImage]?.node ?? images[0]?.node;
 
-  const handleAdd = async () => {
-    if (!variant) return;
-    await addItem({
-      product: { node: product },
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    toast.success("Added to cart", { description: product.title, position: "top-center" });
-  };
 
   return (
     <div className="container py-10 md:py-14">
@@ -118,12 +102,12 @@ const Product = () => {
             ))}
 
           <Button
-            onClick={handleAdd}
-            disabled={cartLoading || !variant?.availableForSale}
+            asChild
             size="lg"
-            className="w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full px-8"
+            variant="outline"
+            className="w-full sm:w-auto rounded-full px-8"
           >
-            {cartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Bag"}
+            <Link to="/contact">Inquire in-store</Link>
           </Button>
 
           {product.description && (

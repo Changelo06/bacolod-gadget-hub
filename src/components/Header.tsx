@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Search, X } from "lucide-react";
 import { Logo } from "./Logo";
-import { CartDrawer } from "./CartDrawer";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
-const NAV = [
+const NAV_PRODUCTS = [
   { to: "/store", label: "Store" },
   { to: "/shop?q=phone", label: "Phones" },
   { to: "/shop?q=laptop", label: "Laptops" },
@@ -16,9 +16,14 @@ const NAV = [
   { to: "/shop?q=monitor", label: "Monitors" },
   { to: "/shop?q=tv", label: "TVs" },
   { to: "/shop?q=accessory OR accessories", label: "Accessories" },
+];
+
+const NAV_SERVICES = [
   { to: "/cpo", label: "CPO" },
   { to: "/contact", label: "Support" },
 ];
+
+const NAV = [...NAV_PRODUCTS, ...NAV_SERVICES];
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -40,12 +45,24 @@ export const Header = () => {
       <div className="container flex h-[68px] items-center justify-between gap-4">
         <Logo />
 
-        <nav className="hidden md:flex items-center gap-7">
-          {NAV.map((item) => (
+        <nav className="hidden md:flex items-center gap-7 flex-1 justify-center">
+          {NAV_PRODUCTS.map((item) => (
             <Link
               key={item.label}
               to={item.to}
               className="text-[13px] font-medium text-foreground/80 hover:text-foreground transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <nav className="hidden md:flex items-center gap-5 mr-2">
+          {NAV_SERVICES.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
             >
               {item.label}
             </Link>
@@ -62,7 +79,7 @@ export const Header = () => {
           >
             {searchOpen ? <X className="h-4 w-4" /> : <Search className="h-4 w-4" />}
           </Button>
-          <CartDrawer />
+          
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden h-9 w-9" aria-label="Menu">
