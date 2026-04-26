@@ -118,12 +118,12 @@ const Product = () => {
             ))}
 
           <Button
-            onClick={handleAdd}
-            disabled={cartLoading || !variant?.availableForSale}
+            asChild
             size="lg"
-            className="w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full px-8"
+            variant="outline"
+            className="w-full sm:w-auto rounded-full px-8"
           >
-            {cartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to Bag"}
+            <Link to="/contact">Inquire in-store</Link>
           </Button>
 
           {product.description && (
