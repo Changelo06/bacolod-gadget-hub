@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/menubar.tsx
+ * Purpose: Reusable menubar primitives based on Radix UI.
+ * Notes: Supports desktop-style menu groups, submenus, checkbox items, radio items, and shortcuts.
+ */
 import * as React from "react";
 import * as MenubarPrimitive from "@radix-ui/react-menubar";
 import { Check, ChevronRight, Circle } from "lucide-react";

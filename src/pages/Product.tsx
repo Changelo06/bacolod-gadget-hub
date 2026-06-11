@@ -1,3 +1,8 @@
+/**
+ * File: src/pages/Product.tsx
+ * Purpose: Product detail page backed by Shopify product handles.
+ * Notes: Displays gallery images, variant options, pricing, availability, and inquiry action.
+ */
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, Loader2 } from "lucide-react";

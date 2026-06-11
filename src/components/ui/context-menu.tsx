@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/context-menu.tsx
+ * Purpose: Reusable context menu primitives based on Radix UI.
+ * Notes: Provides consistent menu items, shortcuts, checkboxes, radio items, and submenus.
+ */
 import * as React from "react";
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";

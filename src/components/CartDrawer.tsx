@@ -1,3 +1,8 @@
+/**
+ * File: src/components/CartDrawer.tsx
+ * Purpose: Legacy Shopify cart drawer UI for adding, updating, removing, and checking out cart items.
+ * Notes: Currently retained for future checkout work; the active product flow uses in-store inquiry.
+ */
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -70,7 +75,7 @@ export const CartDrawer = () => {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium text-sm truncate">{item.product.node.title}</h4>
                       <p className="text-xs text-muted-foreground">
-                        {item.selectedOptions.map((o) => o.value).join(" • ")}
+                        {item.selectedOptions.map((o) => o.value).join(" - ")}
                       </p>
                       <p className="font-semibold text-primary mt-1">
                         {formatPrice(item.price.amount, item.price.currencyCode)}

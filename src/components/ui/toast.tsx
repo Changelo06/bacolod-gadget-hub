@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/toast.tsx
+ * Purpose: Reusable toast notification primitives based on Radix UI.
+ * Notes: Defines toast layout, variants, viewport placement, actions, close controls, and descriptions.
+ */
 import * as React from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";

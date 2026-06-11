@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/command.tsx
+ * Purpose: Reusable command palette primitives based on cmdk and dialog components.
+ * Notes: Supports searchable menus, grouped commands, empty states, and keyboard-first interactions.
+ */
 import * as React from "react";
 import { type DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";

@@ -1,6 +1,11 @@
+/**
+ * File: src/components/Header.tsx
+ * Purpose: Site-wide navigation header with product category links, mobile menu, and Shopify-backed search.
+ * Notes: Coordinates route navigation and lightweight autocomplete for the storefront.
+ */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X } from "lucide-react";
+import { Check, Menu, Search, X } from "lucide-react";
 import { Logo } from "./Logo";
 
 import { Button } from "@/components/ui/button";
@@ -16,10 +21,10 @@ const NAV_PRODUCTS = [
   { to: "/shop?q=monitor", label: "Monitors" },
   { to: "/shop?q=tv", label: "TVs" },
   { to: "/shop?q=accessory OR accessories", label: "Accessories" },
+  { to: "/cpo", label: "CPO", verified: true },
 ];
 
 const NAV_SERVICES = [
-  { to: "/cpo", label: "CPO" },
   { to: "/contact", label: "Support" },
 ];
 
@@ -52,7 +57,7 @@ export const Header = () => {
               to={item.to}
               className="text-[13px] font-medium text-foreground/80 hover:text-foreground transition-colors"
             >
-              {item.label}
+              {item.verified ? <CpoLabel /> : item.label}
             </Link>
           ))}
         </nav>
@@ -94,7 +99,7 @@ export const Header = () => {
                     to={item.to}
                     className="text-lg font-medium py-2 hover:text-accent transition-colors"
                   >
-                    {item.label}
+                    {item.verified ? <CpoLabel /> : item.label}
                   </Link>
                 ))}
               </nav>
@@ -113,6 +118,21 @@ export const Header = () => {
     </header>
   );
 };
+
+const CpoLabel = () => (
+  <span className="inline-flex items-baseline">
+    CP
+    <span className="relative inline-block">
+      <span
+        className="absolute -right-1.5 -top-2 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-background"
+        aria-hidden="true"
+      >
+        <Check className="h-2.5 w-2.5" strokeWidth={3} />
+      </span>
+      O
+    </span>
+  </span>
+);
 
 const SearchBar = ({ onClose }: { onClose: () => void }) => {
   const [q, setQ] = useState("");
@@ -134,7 +154,7 @@ const SearchBar = ({ onClose }: { onClose: () => void }) => {
           autoFocus
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search phones, laptops, accessories…"
+          placeholder="Search phones, laptops, accessories..."
           className="h-12 text-base rounded-full border-border bg-secondary/60 px-5"
         />
       </form>

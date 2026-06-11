@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/sidebar.tsx
+ * Purpose: Reusable responsive sidebar system for app layouts.
+ * Notes: Manages desktop/mobile behavior, keyboard shortcuts, persisted state, and sidebar subcomponents.
+ */
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";

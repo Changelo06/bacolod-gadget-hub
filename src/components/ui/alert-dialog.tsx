@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/alert-dialog.tsx
+ * Purpose: Reusable alert dialog primitives based on Radix UI.
+ * Notes: Provides consistent destructive confirmations, modal structure, titles, descriptions, and actions.
+ */
 import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 

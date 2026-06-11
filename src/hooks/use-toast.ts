@@ -1,3 +1,8 @@
+/**
+ * File: src/hooks/use-toast.ts
+ * Purpose: Toast state manager for the local notification system.
+ * Notes: Implements toast creation, updates, dismissal, and timed removal outside React component state.
+ */
 import * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast";

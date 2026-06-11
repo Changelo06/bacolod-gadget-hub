@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/carousel.tsx
+ * Purpose: Reusable carousel primitives built on Embla for horizontal content navigation.
+ * Notes: Centralizes carousel context, controls, keyboard behavior, and item wrappers.
+ */
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";

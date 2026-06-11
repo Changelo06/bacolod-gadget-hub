@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/sheet.tsx
+ * Purpose: Reusable sheet/drawer primitives based on Radix UI dialog.
+ * Notes: Provides side-panel overlays for navigation, carts, forms, and compact workflows.
+ */
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";

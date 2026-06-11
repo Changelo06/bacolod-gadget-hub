@@ -1,3 +1,8 @@
+/**
+ * File: tailwind.config.ts
+ * Purpose: Tailwind theme configuration for the iWarehouse storefront.
+ * Notes: Defines brand colors, layout tokens, animations, and design-system extensions used across pages.
+ */
 import type { Config } from "tailwindcss";
 
 export default {

@@ -1,10 +1,10 @@
-## iWarehouse Gadgets — Bacolod's Biggest Gadget Store
+## iWarehouse Gadgets - Bacolod's Biggest Gadget Store
 
 A modern, mobile-first storefront powered by a new Shopify development store, with a tech-warehouse aesthetic.
 
 ### Visual direction
-- **Palette:** Neon Mint Tech — deep navy `#0d1b2a` base, forest `#1b4332` surfaces, mint `#2dd4a8` primary accent, neon `#73ffb8` highlight. Crisp white text on dark surfaces.
-- **Typography:** Space Grotesk for headings (bold, geometric), DM Sans for body — clean, modern, very readable on mobile.
+- **Palette:** Neon Mint Tech - deep navy `#0d1b2a` base, forest `#1b4332` surfaces, mint `#2dd4a8` primary accent, neon `#73ffb8` highlight. Crisp white text on dark surfaces.
+- **Typography:** Space Grotesk for headings (bold, geometric), DM Sans for body - clean, modern, very readable on mobile.
 - **Mood:** Sleek, glowing accents, subtle grid/scanline textures, pill badges (NEW / CPO / SALE), product cards with soft mint glow on hover.
 
 ### Setup
@@ -16,12 +16,12 @@ A modern, mobile-first storefront powered by a new Shopify development store, wi
 - Sticky top nav: iWarehouse logo (left) with tagline "Bacolod's Biggest Gadget Store", search with autocomplete, cart icon, mobile hamburger
 - Hero: rotating slideshow (smartphones, laptops, accessories) with "Shop Now" + "View Deals" CTAs
 - Featured Categories grid: Smartphones, Laptops, Tablets, Accessories, CPO Gadgets, Computer Parts & Repairs
-- "Why Choose Us": Trusted Store ✅ · Repairs 🔧 · Affordable CPO 💰 · 109K+ Happy Customers 🏆
+- "Why Choose Us": Trusted Store check - Repairs repairs - Affordable CPO savings - 109K+ Happy Customers customers
 - Hot Deals / Latest Arrivals product grid (live from Shopify)
 - Social proof strip + Facebook page link
 
 **2. Shop / Collection pages**
-- Filters: category, brand (Apple, Samsung, OPPO, Xiaomi…), price range, condition (New / CPO)
+- Filters: category, brand (Apple, Samsung, OPPO, Xiaomi...), price range, condition (New / CPO)
 - Sort: featured, price, newest
 - Product cards: image, name, price, badge, quick "Add to Cart"
 
@@ -39,7 +39,7 @@ A modern, mobile-first storefront powered by a new Shopify development store, wi
 - Order confirmation + tracking link
 
 **6. Contact page**
-- Contact form (name, email, message — validated)
+- Contact form (name, email, message - validated)
 - Store address, hours, phone, Google Maps embed
 - Floating widgets site-wide: Facebook Messenger bubble + Viber/WhatsApp button
 - External links: Lazada, Shopee

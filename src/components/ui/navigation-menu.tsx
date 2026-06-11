@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/navigation-menu.tsx
+ * Purpose: Reusable navigation menu primitives based on Radix UI.
+ * Notes: Provides shared styling for top-level navigation, triggers, content panels, and viewport transitions.
+ */
 import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";

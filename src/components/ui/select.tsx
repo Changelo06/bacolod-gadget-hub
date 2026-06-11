@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/select.tsx
+ * Purpose: Reusable select/dropdown primitives based on Radix UI.
+ * Notes: Provides consistent trigger, viewport, option, label, separator, and scroll button styling.
+ */
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";

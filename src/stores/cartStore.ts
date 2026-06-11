@@ -1,3 +1,8 @@
+/**
+ * File: src/stores/cartStore.ts
+ * Purpose: Persisted Shopify cart store powered by Zustand.
+ * Notes: Creates and syncs Shopify carts, tracks local cart lines, and exposes checkout URL helpers.
+ */
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { ShopifyProduct, SHOPIFY_STOREFRONT_URL, SHOPIFY_STOREFRONT_TOKEN, storefrontApiRequest } from "@/lib/shopify";

@@ -1,3 +1,8 @@
+/**
+ * File: src/lib/shopify.ts
+ * Purpose: Shopify Storefront API client and product query definitions.
+ * Notes: Centralizes API constants, GraphQL requests, product types, and Philippine peso formatting.
+ */
 import { toast } from "sonner";
 
 export const SHOPIFY_API_VERSION = "2025-07";

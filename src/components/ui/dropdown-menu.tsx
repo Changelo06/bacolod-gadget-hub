@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/dropdown-menu.tsx
+ * Purpose: Reusable dropdown menu primitives based on Radix UI.
+ * Notes: Provides consistent trigger, item, checkbox, radio, label, separator, and submenu styling.
+ */
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";

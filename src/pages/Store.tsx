@@ -1,6 +1,14 @@
+/**
+ * File: src/pages/Store.tsx
+ * Purpose: Store updates page for iWarehouse promos, branches, services, partners, and payment offers.
+ * Notes: Uses curated content blocks to present what is happening across the retail network.
+ */
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   MapPin,
   Tag,
   Sparkles,
@@ -12,25 +20,51 @@ import {
   Phone,
   Clock,
   ShieldCheck,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const PROMOS = [
   { tag: "Limited", title: "0% Installment up to 12 months", desc: "On select smartphones and laptops via partner financing." },
   { tag: "Bundle", title: "Free accessories with every new phone", desc: "Case + screen protector + fast charger included." },
-  { tag: "Trade-In", title: "Up to ₱20,000 trade-in credit", desc: "Upgrade your phone or laptop and save instantly." },
+  { tag: "Trade-In", title: "Up to PHP20,000 trade-in credit", desc: "Upgrade your phone or laptop and save instantly." },
 ];
 
 const BRANCHES = [
-  { name: "888 Mall · Bacolod", hours: "Mon–Sun · 10:00 AM – 9:00 PM", phone: "(034) 123-4567" },
-  { name: "Cadiz City", hours: "Mon–Sun · 9:00 AM – 8:00 PM", phone: "(034) 234-5678" },
-  { name: "La Carlota", hours: "Mon–Sun · 9:00 AM – 8:00 PM", phone: "(034) 345-6789" },
-  { name: "Dumaguete", hours: "Mon–Sun · 10:00 AM – 9:00 PM", phone: "(035) 456-7890" },
-  { name: "Kabankalan", hours: "Mon–Sun · 9:00 AM – 8:00 PM", phone: "(034) 567-8901" },
+  {
+    name: "888 Mall - Bacolod",
+    hours: "Mon-Sun - 10:00 AM - 9:00 PM",
+    phone: "(034) 123-4567",
+    mapQuery: "iWarehouse 888 Mall Bacolod",
+  },
+  {
+    name: "Cadiz City",
+    hours: "Mon-Sun - 9:00 AM - 8:00 PM",
+    phone: "(034) 234-5678",
+    mapQuery: "iWarehouse Cadiz City Negros Occidental",
+  },
+  {
+    name: "La Carlota",
+    hours: "Mon-Sun - 9:00 AM - 8:00 PM",
+    phone: "(034) 345-6789",
+    mapQuery: "iWarehouse La Carlota City Negros Occidental",
+  },
+  {
+    name: "Dumaguete",
+    hours: "Mon-Sun - 10:00 AM - 9:00 PM",
+    phone: "(035) 456-7890",
+    mapQuery: "iWarehouse Dumaguete",
+  },
+  {
+    name: "Kabankalan",
+    hours: "Mon-Sun - 9:00 AM - 8:00 PM",
+    phone: "(034) 567-8901",
+    mapQuery: "iWarehouse Kabankalan City Negros Occidental",
+  },
 ];
 
 const UPCOMING = [
-  { date: "Q2 2026", title: "iWarehouse Iloilo", desc: "Crossing the strait — first branch outside Negros." },
+  { date: "Q2 2026", title: "iWarehouse Iloilo", desc: "Crossing the strait - first branch outside Negros." },
   { date: "Coming Soon", title: "iWarehouse Service Hub", desc: "Dedicated repair & service center in Bacolod." },
   { date: "New Arrivals", title: "Latest flagship lineup", desc: "Pre-order the newest phones, tablets, and laptops." },
 ];
@@ -59,7 +93,7 @@ const SERVICES = [
 
 const PAYMENT_OFFERS = [
   { t: "0% Installment", d: "Up to 12 months with Home Credit, Salmon, Skyro." },
-  { t: "Buy Now, Pay Later", d: "PayJoy & PalmPay — own your device today." },
+  { t: "Buy Now, Pay Later", d: "PayJoy & PalmPay - own your device today." },
   { t: "GCash & Cash", d: "Quick, easy in-store and online payments." },
   { t: "Debit / Credit Card", d: "All major cards accepted." },
 ];
@@ -74,15 +108,27 @@ const QUICK_LINKS = [
 ];
 
 const Store = () => {
+  const [activeBranch, setActiveBranch] = useState(0);
+  const currentBranch = BRANCHES[activeBranch];
+  const currentBranchMapQuery = encodeURIComponent(currentBranch.mapQuery);
+
+  const showPreviousBranch = () => {
+    setActiveBranch((index) => (index === 0 ? BRANCHES.length - 1 : index - 1));
+  };
+
+  const showNextBranch = () => {
+    setActiveBranch((index) => (index === BRANCHES.length - 1 ? 0 : index + 1));
+  };
+
   return (
     <div>
       {/* HERO */}
       <section className="bg-secondary/60">
         <div className="container py-14 md:py-20 text-center">
-          <p className="text-sm font-medium text-accent mb-3">iWarehouse · Updates</p>
+          <p className="text-sm font-medium text-accent mb-3">iWarehouse - Updates</p>
           <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">What's new at iWarehouse.</h1>
           <p className="mt-3 text-lg text-foreground/70 max-w-2xl mx-auto">
-            Promos, new branches, trade-ins, partnerships, and services — everything happening across Negros.
+            Promos, new branches, trade-ins, partnerships, and services - everything happening across Negros.
           </p>
         </div>
       </section>
@@ -134,6 +180,91 @@ const Store = () => {
         </div>
       </section>
 
+      {/* BRANCH MAPS */}
+      <section className="container py-16">
+        <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-sm font-medium text-accent mb-2">Find us faster</p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">iWarehouse branch maps.</h2>
+            <p className="mt-3 text-foreground/70">
+              Slide through each branch, check the map, and open directions when you are ready to visit.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={showPreviousBranch}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary hover:bg-foreground hover:text-background transition-colors"
+              aria-label="Previous branch"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={showNextBranch}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary hover:bg-foreground hover:text-background transition-colors"
+              aria-label="Next branch"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
+        <article className="overflow-hidden rounded-3xl bg-secondary/60">
+          <div className="grid lg:grid-cols-[1fr_360px]">
+            <div className="aspect-[16/10] min-h-[300px] bg-background lg:aspect-auto">
+              <iframe
+                title={`${currentBranch.name} map`}
+                src={`https://www.google.com/maps?q=${currentBranchMapQuery}&output=embed`}
+                className="h-full w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <div className="flex flex-col justify-between p-6 md:p-8">
+              <div>
+                <p className="text-sm font-medium text-accent">
+                  Branch {activeBranch + 1} of {BRANCHES.length}
+                </p>
+                <h3 className="mt-2 text-2xl font-semibold tracking-tight">{currentBranch.name}</h3>
+                <p className="mt-4 text-sm text-foreground/70 flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5" /> {currentBranch.hours}
+                </p>
+                <p className="mt-2 text-sm text-foreground/70 flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5" /> {currentBranch.phone}
+                </p>
+              </div>
+
+              <div className="mt-8 space-y-5">
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${currentBranchMapQuery}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-foreground px-5 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
+                >
+                  Open in Google Maps
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+
+                <div className="flex flex-wrap gap-2">
+                  {BRANCHES.map((branch, index) => (
+                    <button
+                      key={branch.name}
+                      type="button"
+                      onClick={() => setActiveBranch(index)}
+                      className={`h-2.5 rounded-full transition-all ${
+                        index === activeBranch ? "w-8 bg-accent" : "w-2.5 bg-foreground/20 hover:bg-foreground/40"
+                      }`}
+                      aria-label={`Show ${branch.name} map`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
       {/* NEW & UPCOMING */}
       <section className="container py-16">
         <div className="rounded-3xl surface-dark p-10 md:p-14">
@@ -162,9 +293,9 @@ const Store = () => {
               Bring in your old phone, laptop, or tablet. Get an instant valuation and apply it directly to your next device.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-foreground/80">
-              <li>• Free, no-obligation appraisal in any branch</li>
-              <li>• Up to ₱20,000 credit on eligible devices</li>
-              <li>• Combine with installment for maximum savings</li>
+              <li>- Free, no-obligation appraisal in any branch</li>
+              <li>- Up to PHP20,000 credit on eligible devices</li>
+              <li>- Combine with installment for maximum savings</li>
             </ul>
             <Button asChild className="mt-6 rounded-full">
               <Link to="/contact">Start a trade-in</Link>

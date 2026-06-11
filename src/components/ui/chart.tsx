@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/chart.tsx
+ * Purpose: Reusable chart primitives that wrap Recharts with the local design-system styling.
+ * Notes: Provides shared tooltip, legend, and color configuration helpers.
+ */
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 

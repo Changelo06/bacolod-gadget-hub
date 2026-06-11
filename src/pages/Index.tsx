@@ -1,3 +1,8 @@
+/**
+ * File: src/pages/Index.tsx
+ * Purpose: Homepage for the iWarehouse storefront.
+ * Notes: Highlights featured Shopify products, shopping categories, payment options, and branch locations.
+ */
 import { Link } from "react-router-dom";
 import { ArrowRight, Smartphone, Laptop, Tablet, Headphones, Monitor, Tv, MapPin, CreditCard, Wallet, Banknote, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,7 +19,7 @@ const CATEGORIES = [
 ];
 
 const BRANCHES = [
-  "888 Mall · Bacolod",
+  "888 Mall - Bacolod",
   "Cadiz City",
   "La Carlota",
   "Dumaguete",
@@ -32,10 +37,10 @@ const Index = () => {
 
   return (
     <div>
-      {/* HERO — product-first like apple.com */}
+      {/* HERO - product-first like apple.com */}
       <section className="bg-secondary/60">
         <div className="container py-14 md:py-20 text-center">
-          <p className="text-sm font-medium text-accent mb-3">New · Now Available</p>
+          <p className="text-sm font-medium text-accent mb-3">New - Now Available</p>
           <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">
             {featured?.node.title ?? "Technology for everyone."}
           </h1>
@@ -69,7 +74,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* SECONDARY HERO TILE — orange accent */}
+      {/* SECONDARY HERO TILE - orange accent */}
       <section className="container py-3">
         <div className="grid md:grid-cols-2 gap-3">
           <div className="surface-dark rounded-3xl p-10 md:p-14 text-center">
@@ -82,7 +87,7 @@ const Index = () => {
           </div>
           <div className="rounded-3xl p-10 md:p-14 text-center" style={{ background: "hsl(var(--accent))" }}>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">Flexible Payments</h2>
-            <p className="mt-2 text-base text-white/85">Cash, GCash, installment & more — your choice.</p>
+            <p className="mt-2 text-base text-white/85">Cash, GCash, installment & more - your choice.</p>
             <Link to="#payments" className="mt-5 inline-block text-white underline font-medium text-sm">
               See all options
             </Link>
@@ -90,7 +95,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CATEGORIES — clean Apple-style row */}
+      {/* CATEGORIES - clean Apple-style row */}
       <section className="container py-16 md:py-20">
         <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-8">Shop by category.</h2>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
@@ -137,7 +142,7 @@ const Index = () => {
           <div className="max-w-3xl">
             <p className="text-sm font-medium text-accent mb-2">Pay your way</p>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Flexible payment options.</h2>
-            <p className="mt-3 text-foreground/70">From cash to installment plans — choose what works for you.</p>
+            <p className="mt-3 text-foreground/70">From cash to installment plans - choose what works for you.</p>
           </div>
           <div className="mt-8 flex flex-wrap gap-2">
             {PAYMENTS.map((p) => (

@@ -1,3 +1,8 @@
+/**
+ * File: src/pages/Contact.tsx
+ * Purpose: Contact and support page for iWarehouse customers.
+ * Notes: Includes validated inquiry form, branch details, chat links, and embedded store map.
+ */
 import { useState } from "react";
 import { z } from "zod";
 import { MapPin, Phone, Clock, Mail, Facebook, MessageCircle } from "lucide-react";
@@ -73,7 +78,7 @@ const Contact = () => {
             </div>
             <Button type="submit" disabled={submitting} size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full">
-              {submitting ? "Sending…" : "Send Message"}
+              {submitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </div>
@@ -82,7 +87,7 @@ const Contact = () => {
           <InfoRow icon={MapPin} title="888 Mall, Bacolod" body="Plus Cadiz, La Carlota, Dumaguete & Kabankalan." />
           <InfoRow icon={Phone} title="Call us" body="+63 900 000 0000" />
           <InfoRow icon={Mail} title="Email" body="hello@iwarehouse.ph" />
-          <InfoRow icon={Clock} title="Store hours" body="Mon–Sun · 9:00 AM – 8:00 PM" />
+          <InfoRow icon={Clock} title="Store hours" body="Mon-Sun - 9:00 AM - 8:00 PM" />
 
           <div className="grid grid-cols-2 gap-3 pt-2">
             <a href="https://m.me/iwarehousebacolod" target="_blank" rel="noopener noreferrer"

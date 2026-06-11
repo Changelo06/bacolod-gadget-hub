@@ -1,3 +1,8 @@
+/**
+ * File: src/components/ui/form.tsx
+ * Purpose: Reusable form primitives that connect react-hook-form state to local UI components.
+ * Notes: Centralizes labels, descriptions, validation messages, and accessible field wiring.
+ */
 import * as React from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
