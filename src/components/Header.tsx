@@ -14,17 +14,17 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
 const NAV_PRODUCTS = [
-  { to: "/store", label: "Store" },
   { to: "/shop?q=phone", label: "Phones" },
   { to: "/shop?q=laptop", label: "Laptops" },
   { to: "/shop?q=pc OR desktop", label: "PCs" },
   { to: "/shop?q=monitor", label: "Monitors" },
   { to: "/shop?q=tv", label: "TVs" },
   { to: "/shop?q=accessory OR accessories", label: "Accessories" },
-  { to: "/cpo", label: "CPO", verified: true },
+  { to: "/cpo", label: "Pre-Owned", verified: true },
 ];
 
 const NAV_SERVICES = [
+  { to: "/store", label: "About Us" },
   { to: "/contact", label: "Support" },
 ];
 
@@ -57,7 +57,7 @@ export const Header = () => {
               to={item.to}
               className="text-[13px] font-medium text-foreground/80 hover:text-foreground transition-colors"
             >
-              {item.verified ? <CpoLabel /> : item.label}
+              {item.verified ? <PreownedLabel /> : item.label}
             </Link>
           ))}
         </nav>
@@ -99,7 +99,7 @@ export const Header = () => {
                     to={item.to}
                     className="text-lg font-medium py-2 hover:text-accent transition-colors"
                   >
-                    {item.verified ? <CpoLabel /> : item.label}
+                    {item.verified ? <PreownedLabel /> : item.label}
                   </Link>
                 ))}
               </nav>
@@ -119,17 +119,14 @@ export const Header = () => {
   );
 };
 
-const CpoLabel = () => (
-  <span className="inline-flex items-baseline">
-    CP
-    <span className="relative inline-block">
-      <span
-        className="absolute -right-1.5 -top-2 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-background"
-        aria-hidden="true"
-      >
-        <Check className="h-2.5 w-2.5" strokeWidth={3} />
-      </span>
-      O
+const PreownedLabel = () => (
+  <span className="inline-flex items-center gap-1">
+    <span>Pre-Owned</span>
+    <span
+      className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-background"
+      aria-hidden="true"
+    >
+      <Check className="h-2.5 w-2.5" strokeWidth={3} />
     </span>
   </span>
 );
