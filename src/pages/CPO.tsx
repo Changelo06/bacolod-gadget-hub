@@ -1,94 +1,19 @@
 import { Link } from "react-router-dom";
-import { ShieldCheck, BadgeCheck, Recycle, Award, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
+import { CatalogState } from "@/components/CatalogState";
 import { useProducts } from "@/hooks/useProducts";
 
-const PROMISES = [
-  { icon: BadgeCheck, title: "Inspected & Certified", desc: "Multi-point quality check on every unit." },
-  { icon: ShieldCheck, title: "Warranty Included", desc: "Peace of mind with iWarehouse warranty." },
-  { icon: Recycle, title: "Sustainable Choice", desc: "Premium gadgets, second life, big savings." },
-  { icon: Award, title: "Negros' CPO Pioneer", desc: "We brought CPO to the region first." },
-];
-
 const CPO = () => {
-  const { data: products = [], isLoading } = useProducts("title:*cpo* OR title:*pre-owned*", 12);
-
+  const { data: products = [], isLoading, isError, refetch, isFetching } = useProducts("title:*cpo* OR title:*pre-owned*", 12);
   return (
-    <div>
-      {/* HERO */}
-      <section className="bg-secondary/60">
-        <div className="container py-16 md:py-24 text-center">
-          <p className="text-sm font-medium text-accent mb-3">Certified Pre-Owned</p>
-          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">
-            Premium tech.<br /><span className="text-accent">Smarter price.</span>
-          </h1>
-          <p className="mt-4 text-lg text-foreground/70 max-w-xl mx-auto">
-            Fully inspected, warranty-backed smartphones and laptops at a fraction of retail.
-          </p>
-        </div>
+    <div className="container section-space">
+      <header className="mb-10 max-w-2xl"><p className="eyebrow">Pre-owned devices</p><h1 className="text-4xl md:text-5xl">A different way to upgrade.</h1><p className="mt-4 text-lg leading-relaxed text-muted-foreground">Explore available pre-owned units. Condition, included accessories and warranty coverage should be confirmed for each device.</p></header>
+      <section aria-label="Pre-owned catalog">
+        {isLoading ? <CatalogState loading /> : isError ? <CatalogState error onRetry={() => refetch()} retrying={isFetching} /> : products.length === 0 ? <CatalogState /> : <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">{products.map((product) => <ProductCard key={product.node.id} product={product} />)}</div>}
       </section>
-
-      <section className="container py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {PROMISES.map((p) => (
-            <div key={p.title} className="p-6 rounded-2xl bg-secondary/60">
-              <p.icon className="h-7 w-7 text-accent mb-3" strokeWidth={1.75} />
-              <h3 className="font-semibold mb-1">{p.title}</h3>
-              <p className="text-sm text-muted-foreground">{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="container py-8">
-        <div className="rounded-3xl surface-dark p-10 md:p-14">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">Our CPO Quality Checklist</h2>
-          <ul className="grid sm:grid-cols-2 gap-3 text-background/80">
-            {[
-              "Battery health verified at 85% or higher",
-              "All hardware functions tested",
-              "Original or premium replacement parts",
-              "Cosmetic grading & honest condition reports",
-              "Factory-reset & data-wiped",
-              "Backed by iWarehouse warranty",
-            ].map((item) => (
-              <li key={item} className="flex gap-2">
-                <BadgeCheck className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="container py-16">
-        <div className="flex items-end justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Featured CPO.</h2>
-          <Button asChild variant="ghost" className="text-accent hover:text-accent">
-            <Link to="/shop">All Products <ArrowRight className="ml-1 h-4 w-4" /></Link>
-          </Button>
-        </div>
-
-        {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[3/4] rounded-3xl bg-secondary/60 animate-pulse" />
-            ))}
-          </div>
-        ) : products.length === 0 ? (
-          <div className="text-center py-16 rounded-3xl bg-secondary/60">
-            <p className="font-semibold mb-1">No CPO products yet</p>
-            <p className="text-sm text-muted-foreground">Tag products with "CPO" or "Pre-Owned" to feature them here.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
-          </div>
-        )}
-      </section>
+      <section className="section-space" aria-labelledby="condition-title"><div className="section-heading"><div><p className="eyebrow">Before choosing a unit</p><h2 id="condition-title">Know what you’re getting.</h2></div><Link to="/store" className="text-link">Ask a branch <ArrowRight className="h-4 w-4" /></Link></div><dl className="grid gap-x-10 sm:grid-cols-2">{[{ title: "Condition & battery", text: "Request actual unit photos, cosmetic grading and the current battery-health reading where supported." }, { title: "Parts & function", text: "Ask about replacement parts and checks for charging, cameras, speakers, buttons and connectivity." }, { title: "Warranty & returns", text: "Confirm coverage, duration, exclusions and the process if a problem occurs." }, { title: "What comes with it", text: "Check the charger, accessories, storage, network compatibility and any account locks." }].map((item) => <div className="border-t py-6" key={item.title}><dt className="text-lg font-semibold">{item.title}</dt><dd className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.text}</dd></div>)}</dl></section>
     </div>
   );
 };
-
 export default CPO;

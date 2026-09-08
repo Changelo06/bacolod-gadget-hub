@@ -3,17 +3,21 @@
  * Purpose: Shopify Storefront API client and product query definitions.
  * Notes: Centralizes API constants, GraphQL requests, product types, and Philippine peso formatting.
  */
-import { toast } from "sonner";
+
 
 export const SHOPIFY_API_VERSION = "2025-07";
 export const SHOPIFY_STORE_PERMANENT_DOMAIN = "gadget-hub-online-2ohlp.myshopify.com";
 export const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-export const SHOPIFY_STOREFRONT_TOKEN = "b122eeeac007b8707a09176c985394be";
+export const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN ?? "";
 
 export interface ShopifyProduct {
   node: {
     id: string;
     title: string;
+    vendor?: string;
+    productType?: string;
+    demo?: boolean;
+    condition?: string;
     description: string;
     handle: string;
     priceRange: {
@@ -44,6 +48,8 @@ export const PRODUCTS_QUERY = `
         node {
           id
           title
+          vendor
+          productType
           description
           handle
           priceRange { minVariantPrice { amount currencyCode } }
@@ -71,6 +77,8 @@ export const PRODUCT_BY_HANDLE_QUERY = `
     product(handle: $handle) {
       id
       title
+      vendor
+      productType
       description
       handle
       priceRange { minVariantPrice { amount currencyCode } }
@@ -92,6 +100,7 @@ export const PRODUCT_BY_HANDLE_QUERY = `
 `;
 
 export async function storefrontApiRequest(query: string, variables: Record<string, unknown> = {}) {
+  if (!SHOPIFY_STOREFRONT_TOKEN) throw new Error("The catalog connection is not configured.");
   const response = await fetch(SHOPIFY_STOREFRONT_URL, {
     method: "POST",
     headers: {
@@ -99,15 +108,10 @@ export async function storefrontApiRequest(query: string, variables: Record<stri
       "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
     },
     body: JSON.stringify({ query, variables }),
+    signal: AbortSignal.timeout(12000),
   });
 
-  if (response.status === 402) {
-    toast.error("Shopify: Payment required", {
-      description:
-        "Shopify API access requires an active billing plan. Visit https://admin.shopify.com to upgrade.",
-    });
-    return;
-  }
+  if (response.status === 402) throw new Error("The catalog is temporarily unavailable.");
 
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 

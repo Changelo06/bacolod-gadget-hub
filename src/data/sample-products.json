@@ -1,0 +1,686 @@
+[
+  {
+    "node": {
+      "id": "demo-125",
+      "title": "Oppo A57",
+      "vendor": "Oppo",
+      "productType": "smartphones",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-125",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "7990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-125.webp",
+              "altText": "Oppo A57"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-125",
+              "title": "Default Title",
+              "price": {
+                "amount": "7990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-128",
+      "title": "Realme C35",
+      "vendor": "Realme",
+      "productType": "smartphones",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-128",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "8990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-128.webp",
+              "altText": "Realme C35"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-128",
+              "title": "Default Title",
+              "price": {
+                "amount": "8990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-133",
+      "title": "Samsung Galaxy S10",
+      "vendor": "Samsung",
+      "productType": "smartphones",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-133",
+      "condition": "Pre-owned",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "11990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-133.webp",
+              "altText": "Samsung Galaxy S10"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-133",
+              "title": "Default Title",
+              "price": {
+                "amount": "11990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-123",
+      "title": "iPhone 13 Pro",
+      "vendor": "Apple",
+      "productType": "smartphones",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-123",
+      "condition": "Pre-owned",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "27990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-123.webp",
+              "altText": "iPhone 13 Pro"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-123",
+              "title": "Default Title",
+              "price": {
+                "amount": "27990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-79",
+      "title": "ASUS Zenbook Pro Duo",
+      "vendor": "Asus",
+      "productType": "laptops",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-79",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "79990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-79.webp",
+              "altText": "Asus Zenbook Pro Dual Screen Laptop"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-79",
+              "title": "Default Title",
+              "price": {
+                "amount": "79990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-81",
+      "title": "Lenovo Yoga 920",
+      "vendor": "Lenovo",
+      "productType": "laptops",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-81",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "39990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-81.webp",
+              "altText": "Lenovo Yoga 920"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-81",
+              "title": "Default Title",
+              "price": {
+                "amount": "39990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-80",
+      "title": "Huawei Matebook X Pro",
+      "vendor": "Huawei",
+      "productType": "laptops",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-80",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "49990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-80.webp",
+              "altText": "Huawei Matebook X Pro"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-80",
+              "title": "Default Title",
+              "price": {
+                "amount": "49990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-159",
+      "title": "iPad Mini 2021 Starlight",
+      "vendor": "Apple",
+      "productType": "tablets",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-159",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "24990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-159.webp",
+              "altText": "iPad Mini 2021 Starlight"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-159",
+              "title": "Default Title",
+              "price": {
+                "amount": "24990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-160",
+      "title": "Samsung Galaxy Tab S8 Plus Grey",
+      "vendor": "Samsung",
+      "productType": "tablets",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-160",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "34990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-160.webp",
+              "altText": "Samsung Galaxy Tab S8 Plus Grey"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-160",
+              "title": "Default Title",
+              "price": {
+                "amount": "34990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-107",
+      "title": "Beats Flex Wireless Earphones",
+      "vendor": "Beats",
+      "productType": "mobile-accessories",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-107",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "2990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-107.webp",
+              "altText": "Beats Flex Wireless Earphones"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-107",
+              "title": "Default Title",
+              "price": {
+                "amount": "2990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-134",
+      "title": "Vivo S1",
+      "vendor": "Vivo",
+      "productType": "smartphones",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-134",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "9990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-134.webp",
+              "altText": "Vivo S1"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-134",
+              "title": "Default Title",
+              "price": {
+                "amount": "9990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "id": "demo-78",
+      "title": "MacBook Pro 14-inch",
+      "vendor": "Apple",
+      "productType": "laptops",
+      "demo": true,
+      "description": "Sample device for this design preview. The peso price is illustrative and is not an iWarehouse offer. Ask the branch to confirm the exact model, specifications, condition, inclusions and current price.",
+      "handle": "sample-78",
+      "condition": "New",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "89990",
+          "currencyCode": "PHP"
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": "/images/device-78.webp",
+              "altText": "Apple MacBook Pro 14 Inch Space Grey"
+            }
+          }
+        ]
+      },
+      "variants": {
+        "edges": [
+          {
+            "node": {
+              "id": "demo-variant-78",
+              "title": "Default Title",
+              "price": {
+                "amount": "89990",
+                "currencyCode": "PHP"
+              },
+              "availableForSale": false,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ]
+    }
+  }
+]

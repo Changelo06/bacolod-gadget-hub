@@ -1,130 +1,37 @@
-/**
- * File: src/pages/Product.tsx
- * Purpose: Product detail page backed by Shopify product handles.
- * Notes: Displays gallery images, variant options, pricing, availability, and inquiry action.
- */
-import { useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ChevronLeft, Loader2 } from "lucide-react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { useProductByHandle } from "@/hooks/useProducts";
 import { formatPrice } from "@/lib/shopify";
+import { productCondition } from "@/lib/catalog";
+import { CatalogState } from "@/components/CatalogState";
 
 const Product = () => {
-  const { handle } = useParams<{ handle: string }>();
-  const { data: product, isLoading } = useProductByHandle(handle);
-  const [activeImage, setActiveImage] = useState(0);
-  const [variantId, setVariantId] = useState<string | null>(null);
-
-  const variant = useMemo(() => {
-    if (!product) return null;
-    const variants = product.variants.edges;
-    return (variants.find((v) => v.node.id === variantId) ?? variants[0])?.node ?? null;
-  }, [product, variantId]);
-
-  if (isLoading) {
-    return (
-      <div className="container py-20 flex justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!product) {
-    return (
-      <div className="container py-20 text-center">
-        <h1 className="font-display text-2xl font-bold mb-3">Product not found</h1>
-        <Button asChild variant="outline"><Link to="/shop">Back to Shop</Link></Button>
-      </div>
-    );
-  }
-
-  const images = product.images.edges;
-  const image = images[activeImage]?.node ?? images[0]?.node;
-
-
-  return (
-    <div className="container py-10 md:py-14">
-      <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-accent mb-6">
-        <ChevronLeft className="h-4 w-4" /> Back to shop
-      </Link>
-
-      <div className="grid lg:grid-cols-2 gap-10">
-        <div className="space-y-3">
-          <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/60 p-6">
-            {image && <img src={image.url} alt={image.altText ?? product.title} className="w-full h-full object-contain" />}
-          </div>
-          {images.length > 1 && (
-            <div className="grid grid-cols-5 gap-2">
-              {images.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveImage(i)}
-                  className={`aspect-square rounded-xl overflow-hidden border-2 bg-secondary/60 p-2 ${i === activeImage ? "border-accent" : "border-transparent"}`}
-                >
-                  <img src={img.node.url} alt="" className="w-full h-full object-contain" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="space-y-6">
-          <div>
-            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">{product.title}</h1>
-            <p className="text-2xl font-semibold mt-3">
-              {variant ? formatPrice(variant.price.amount, variant.price.currencyCode) : ""}
-            </p>
-            {variant && !variant.availableForSale && <Badge variant="destructive" className="mt-2">Sold out</Badge>}
-          </div>
-
-          {product.options
-            .filter((o) => o.name.toLowerCase() !== "title" || o.values.length > 1)
-            .map((opt) => (
-              <div key={opt.name}>
-                <p className="text-sm font-medium mb-2">{opt.name}</p>
-                <div className="flex flex-wrap gap-2">
-                  {product.variants.edges
-                    .filter((v) => v.node.selectedOptions.some((s) => s.name === opt.name))
-                    .map((v) => {
-                      const so = v.node.selectedOptions.find((s) => s.name === opt.name);
-                      const isActive = (variant?.id ?? product.variants.edges[0].node.id) === v.node.id;
-                      return (
-                        <button
-                          key={v.node.id}
-                          onClick={() => setVariantId(v.node.id)}
-                          className={`px-4 py-2 rounded-full border text-sm transition-colors ${
-                            isActive ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/50"
-                          }`}
-                        >
-                          {so?.value}
-                        </button>
-                      );
-                    })}
-                </div>
-              </div>
-            ))}
-
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="w-full sm:w-auto rounded-full px-8"
-          >
-            <Link to="/contact">Inquire in-store</Link>
-          </Button>
-
-          {product.description && (
-            <div className="pt-6 border-t border-border">
-              <h2 className="font-semibold mb-2">Description</h2>
-              <p className="text-muted-foreground whitespace-pre-line leading-relaxed">{product.description}</p>
-            </div>
-          )}
-        </div>
+  const {handle} = useParams<{handle:string}>();
+  const [params,setParams] = useSearchParams();
+  const {data:product,isLoading,isError,isFetching,refetch} = useProductByHandle(handle);
+  if(isLoading) return <div className="container section-space"><CatalogState loading /></div>;
+  if(isError) return <div className="container section-space"><CatalogState error onRetry={()=>refetch()} retrying={isFetching} /></div>;
+  if(!product) return <div className="container section-space"><h1 className="text-3xl">Device not found.</h1><Button asChild variant="outline" className="mt-6"><Link to="/shop">Back to devices</Link></Button></div>;
+  const variants=product.variants.edges;
+  const variant=variants.find(({node})=>node.id===params.get("variant"))?.node ?? variants[0]?.node;
+  const imageIndex=Math.max(0,Number.parseInt(params.get("image") ?? "0",10)||0);
+  const image=product.images.edges[imageIndex]?.node ?? product.images.edges[0]?.node;
+  const price=variant?.price ?? product.priceRange.minVariantPrice;
+  const inquiry=new URLSearchParams({product:product.title});
+  if(variant && variant.title!=="Default Title") inquiry.set("option",variant.title);
+  return <div className="container section-space">
+    <Link to="/shop" className="text-link mb-6"><ArrowLeft aria-hidden="true" className="h-4 w-4" />Back to devices</Link>
+    <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
+      <div><div className="product-detail-image">{image ? <img src={image.url} alt={image.altText ?? product.title} width="700" height="700" {...{ fetchpriority: "high" }} /> : <p>Photo unavailable</p>}</div>{product.images.edges.length>1 && <div className="mt-4 flex flex-wrap gap-3">{product.images.edges.map((img,i)=><button key={img.node.url} type="button" aria-label={'View photo ' + (i+1)} aria-pressed={i===imageIndex} onClick={()=>{const next=new URLSearchParams(params);next.set("image",String(i));setParams(next,{replace:true});}} className={'h-16 w-16 rounded-md border p-2 ' + (i===imageIndex ? 'border-primary':'border-border')}><img src={img.node.url} alt="" width="64" height="64" loading="lazy" className="h-full w-full object-contain" /></button>)}</div>}</div>
+      <div><div className="mb-4 flex flex-wrap gap-3 text-sm text-muted-foreground"><span translate="no">{product.vendor}</span><span>{productCondition({node:product})}</span></div><h1 className="text-3xl md:text-4xl">{product.title}</h1><p className="mt-6 text-3xl font-extrabold tabular-nums">{formatPrice(price.amount,price.currencyCode)}</p><p className="mt-2 text-sm text-muted-foreground">{product.demo ? "Illustrative price for this design preview." : "Listed device price. Confirm the final price with your branch."}</p>
+      {variants.length>1 && <label className="mt-6 grid gap-2 text-sm font-semibold">Choose an option<select value={variant?.id} onChange={(event)=>{const next=new URLSearchParams(params);next.set("variant",event.target.value);setParams(next);}}>{variants.map(({node})=><option key={node.id} value={node.id}>{node.title}{!node.availableForSale && !product.demo ? " · unavailable":""}</option>)}</select></label>}
+      <div className="my-6 rounded-md bg-secondary p-4 text-sm leading-relaxed">{product.demo ? "Sample device only. This listing does not confirm iWarehouse stock, specifications or a sales offer." : variant?.availableForSale ? "Ask your preferred branch about stock before visiting." : "This option is currently unavailable. Ask a branch about alternatives."}</div>
+      <Button asChild size="lg" className="primary-action"><Link to={'/contact?' + inquiry}>Ask about this device <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></Button>
+      <div className="mt-8 border-t pt-6"><h2 className="text-lg">Before you decide</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Confirm storage, colour, included accessories, warranty and payment terms. For installments, ask for the down payment, monthly amount, number of months and total payable.</p></div>
+      {product.description && <div className="mt-6"><h2 className="text-lg">About this device</h2><p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{product.description}</p></div>}
       </div>
     </div>
-  );
+  </div>;
 };
-
 export default Product;

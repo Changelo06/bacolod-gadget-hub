@@ -1,177 +1,48 @@
-/**
- * File: src/components/Header.tsx
- * Purpose: Site-wide navigation header with product category links, mobile menu, and Shopify-backed search.
- * Notes: Coordinates route navigation and lightweight autocomplete for the storefront.
- */
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Check, Menu, Search, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Menu, Search, X } from "lucide-react";
 import { Logo } from "./Logo";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription, SheetClose } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
-const NAV_PRODUCTS = [
-  { to: "/shop?q=phone", label: "Phones" },
-  { to: "/shop?q=laptop", label: "Laptops" },
-  { to: "/shop?q=pc OR desktop", label: "PCs" },
-  { to: "/shop?q=monitor", label: "Monitors" },
-  { to: "/shop?q=tv", label: "TVs" },
-  { to: "/shop?q=accessory OR accessories", label: "Accessories" },
-  { to: "/cpo", label: "Pre-Owned", verified: true },
-];
-
-const NAV_SERVICES = [
-  { to: "/store", label: "About Us" },
-  { to: "/contact", label: "Support" },
-];
-
-const NAV = [...NAV_PRODUCTS, ...NAV_SERVICES];
-
-export const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all ${
-        scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border" : "bg-background/60 backdrop-blur-md"
-      }`}
-    >
-      <div className="container flex h-[68px] items-center justify-between gap-4">
-        <Logo />
-
-        <nav className="hidden md:flex items-center gap-7 flex-1 justify-center">
-          {NAV_PRODUCTS.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              className="text-[13px] font-medium text-foreground/80 hover:text-foreground transition-colors"
-            >
-              {item.verified ? <PreownedLabel /> : item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <nav className="hidden md:flex items-center gap-5 mr-2">
-          {NAV_SERVICES.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setSearchOpen((v) => !v)}
-            aria-label="Search"
-            className="h-9 w-9"
-          >
-            {searchOpen ? <X className="h-4 w-4" /> : <Search className="h-4 w-4" />}
-          </Button>
-          
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden h-9 w-9" aria-label="Menu">
-                <Menu className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[280px]">
-              <nav className="flex flex-col gap-1 mt-10">
-                {NAV.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.to}
-                    className="text-lg font-medium py-2 hover:text-accent transition-colors"
-                  >
-                    {item.verified ? <PreownedLabel /> : item.label}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-
-      {searchOpen && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-xl">
-          <div className="container py-5">
-            <SearchBar onClose={() => setSearchOpen(false)} />
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
-const PreownedLabel = () => (
-  <span className="inline-flex items-center gap-1">
-    <span>Pre-Owned</span>
-    <span
-      className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-background"
-      aria-hidden="true"
-    >
-      <Check className="h-2.5 w-2.5" strokeWidth={3} />
-    </span>
-  </span>
-);
-
-const SearchBar = ({ onClose }: { onClose: () => void }) => {
-  const [q, setQ] = useState("");
-  const navigate = useNavigate();
-  const { data: results = [] } = useProducts(q ? `title:*${q}*` : undefined, 6);
-
-  return (
-    <div className="relative max-w-2xl mx-auto">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (q.trim()) {
-            navigate(`/shop?q=${encodeURIComponent(q)}`);
-            onClose();
-          }
-        }}
-      >
-        <Input
-          autoFocus
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Search phones, laptops, accessories..."
-          className="h-12 text-base rounded-full border-border bg-secondary/60 px-5"
-        />
-      </form>
-      {q && results.length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-2 bg-card border border-border rounded-2xl shadow-soft overflow-hidden">
-          {results.map((r) => (
-            <Link
-              key={r.node.id}
-              to={`/product/${r.node.handle}`}
-              onClick={onClose}
-              className="flex items-center gap-3 px-4 py-3 hover:bg-secondary transition-colors"
-            >
-              {r.node.images.edges[0] && (
-                <img src={r.node.images.edges[0].node.url} alt="" className="h-10 w-10 rounded object-cover" />
-              )}
-              <span className="text-sm font-medium flex-1 truncate">{r.node.title}</span>
-            </Link>
-          ))}
-        </div>
-      )}
+const NAV = [{ to: "/shop", label: "Shop devices" }, { to: "/cpo", label: "Pre-owned" }, { to: "/store", label: "Our branches" }, { to: "/contact", label: "Contact" }];
+export const Header = () => (
+  <header className="site-header">
+    <div className="container retail-header">
+      <Logo />
+      <div className="header-search"><SearchBar /></div>
+      <nav className="desktop-nav" aria-label="Main navigation">
+        {NAV.map((item) => <NavLink key={item.to} to={item.to} className={({ isActive }) => 'header-link' + (isActive ? ' is-active' : '')}>{item.label}</NavLink>)}
+      </nav>
+      <Sheet>
+        <SheetTrigger asChild><Button variant="ghost" size="icon" className="mobile-menu h-11 w-11 hover:bg-white/10 hover:text-white" aria-label="Open navigation"><Menu aria-hidden="true" className="h-5 w-5" /></Button></SheetTrigger>
+        <SheetContent side="right" className="w-[min(340px,100vw)] overscroll-contain">
+          <SheetTitle>iWarehouse</SheetTitle><SheetDescription>Browse devices or plan your visit.</SheetDescription>
+          <nav className="mt-8 flex flex-col gap-2" aria-label="Mobile navigation">{NAV.map((item) => <SheetClose key={item.to} asChild><NavLink to={item.to} className="min-h-11 border-b py-3 text-lg font-medium">{item.label}</NavLink></SheetClose>)}</nav>
+        </SheetContent>
+      </Sheet>
     </div>
-  );
-};
+  </header>
+);
+function SearchBar() {
+  const [query, setQuery] = useState("");
+  const [debounced, setDebounced] = useState("");
+  const [open, setOpen] = useState(false);
+  const input = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  useEffect(() => { const timer = window.setTimeout(() => setDebounced(query.trim()), 250); return () => window.clearTimeout(timer); }, [query]);
+  const { data: results = [], isError, isFetching } = useProducts(debounced ? 'title:*' + debounced + '*' : undefined, 5, !!debounced && open);
+  return <div className="search-field" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={(event) => { if (event.key === "Escape") { setOpen(false); input.current?.focus(); } }}>
+    <form role="search" onSubmit={(event) => { event.preventDefault(); if (query.trim()) { navigate('/shop?q=' + encodeURIComponent(query.trim())); setOpen(false); input.current?.blur(); } }}>
+      <label htmlFor="device-search" className="sr-only">Search devices</label>
+      <Input ref={input} id="device-search" name="q" type="search" autoComplete="off" value={query} onFocus={() => setOpen(true)} onChange={(event) => { setQuery(event.target.value); setOpen(true); }} placeholder="Search a brand, device or model…" className="h-11 border-0 bg-transparent pr-12 text-base text-foreground shadow-none" />
+      <button type="submit" aria-label="Search catalog" className="search-submit"><Search aria-hidden="true" className="h-5 w-5" /></button>
+    </form>
+    {open && !!debounced && <div className="search-results">
+      <div className="flex items-center justify-between gap-2 px-4 pt-2"><span className="text-xs text-muted-foreground">Matching devices</span><button type="button" aria-label="Close suggestions" onClick={() => { setOpen(false); input.current?.focus(); }} className="flex h-11 w-11 items-center justify-center"><X aria-hidden="true" className="h-4 w-4" /></button></div>
+      {isFetching || debounced !== query.trim() ? <p role="status" className="p-4 text-sm">Searching…</p> : isError ? <p role="status" className="p-4 text-sm">Search couldn’t load. Submit your search to try again.</p> : results.length === 0 ? <p role="status" className="p-4 text-sm">No matches. Try another brand or model.</p> : results.map((result) => <Link key={result.node.id} to={'/product/' + result.node.handle} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-3 px-4 py-3 hover:bg-secondary">{result.node.images.edges[0] && <img src={result.node.images.edges[0].node.url} alt="" width="40" height="40" className="h-10 w-10 object-contain" />}<span className="min-w-0 truncate text-sm font-medium">{result.node.title}</span></Link>)}
+    </div>}
+  </div>;
+}

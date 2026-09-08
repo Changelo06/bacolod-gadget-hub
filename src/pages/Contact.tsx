@@ -1,126 +1,53 @@
-/**
- * File: src/pages/Contact.tsx
- * Purpose: Contact and support page for iWarehouse customers.
- * Notes: Includes validated inquiry form, branch details, chat links, and embedded store map.
- */
 import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { z } from "zod";
-import { MapPin, Phone, Clock, Mail, Facebook, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 
 const schema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email").max(255),
-  message: z.string().trim().min(1, "Message is required").max(1000),
+  name: z.string().trim().min(1, "Enter your name.").max(100),
+  email: z.string().trim().email("Enter a valid email address.").max(255),
+  message: z.string().trim().min(1, "Tell us which device or service you need.").max(1000),
 });
-
 const Contact = () => {
-  const [submitting, setSubmitting] = useState(false);
+  const [params] = useSearchParams();
+  const device = params.get("product");
+  const option = params.get("option");
+  const initialMessage = device ? "Hi! I would like to ask about " + device + (option ? " (" + option + ")" : "") + ". Please confirm the price, stock and payment options at my preferred branch." : "";
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const result = schema.safeParse({
-      name: fd.get("name"),
-      email: fd.get("email"),
-      message: fd.get("message"),
-    });
+  const [reviewed, setReviewed] = useState(false);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const result = schema.safeParse(Object.fromEntries(new FormData(event.currentTarget)));
     if (!result.success) {
-      const errs: Record<string, string> = {};
-      result.error.issues.forEach((i) => (errs[i.path[0] as string] = i.message));
-      setErrors(errs);
+      const next: Record<string, string> = {};
+      result.error.issues.forEach((issue) => { next[String(issue.path[0])] = issue.message; });
+      setErrors(next);
+      event.currentTarget.querySelector<HTMLElement>('[name="' + result.error.issues[0].path[0] + '"]')?.focus();
       return;
     }
     setErrors({});
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      toast.success("Message sent!", {
-        description: "We'll get back to you within one business day.",
-        position: "top-center",
-      });
-    }, 600);
+    setReviewed(true);
   };
-
   return (
-    <div className="container py-12 md:py-16">
-      <header className="mb-10 max-w-2xl">
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">Get in touch.</h1>
-        <p className="text-foreground/70 mt-3 text-lg">
-          Visit a branch, send a message, or chat with us on Messenger or Viber.
-        </p>
-      </header>
-
-      <div className="grid lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3 p-8 rounded-3xl bg-secondary/60">
-          <h2 className="text-2xl font-semibold mb-6">Send a message</h2>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" maxLength={100} className="mt-1.5 h-11 rounded-xl bg-background" />
-              {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" maxLength={255} className="mt-1.5 h-11 rounded-xl bg-background" />
-              {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-            </div>
-            <div>
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" name="message" maxLength={1000} rows={5} className="mt-1.5 rounded-xl bg-background" />
-              {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
-            </div>
-            <Button type="submit" disabled={submitting} size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90 font-medium rounded-full">
-              {submitting ? "Sending..." : "Send Message"}
-            </Button>
+    <div className="container section-space">
+      <header className="mb-10 max-w-2xl"><p className="eyebrow">Contact & inquiries</p><h1 className="text-4xl md:text-5xl">Let’s find your next device.</h1><p className="mt-4 text-lg leading-relaxed text-muted-foreground">Have a model, budget or service question? Start with the details below.</p></header>
+      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+        <section className="rounded-lg border p-5 sm:p-8" aria-labelledby="inquiry-title">
+          <h2 id="inquiry-title" className="text-2xl">Prepare an inquiry</h2><p id="form-note" className="mb-6 mt-3 text-sm leading-relaxed text-muted-foreground">This proof-of-concept form does not send messages. Your details stay on this page; a verified contact channel is needed before sending can be enabled.</p>
+          <form onSubmit={handleSubmit} onChange={() => setReviewed(false)} noValidate aria-describedby="form-note" className="space-y-5">
+            <div><Label htmlFor="name">Name</Label><Input id="name" name="name" autoComplete="name" required maxLength={100} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} className="mt-2 h-11 text-base" />{errors.name && <p id="name-error" className="mt-2 text-sm text-destructive">{errors.name}</p>}</div>
+            <div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" spellCheck={false} autoComplete="email" required maxLength={255} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} className="mt-2 h-11 text-base" />{errors.email && <p id="email-error" className="mt-2 text-sm text-destructive">{errors.email}</p>}</div>
+            <div><Label htmlFor="message">Device or service inquiry</Label><Textarea defaultValue={initialMessage} id="message" name="message" required maxLength={1000} rows={5} aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} className="mt-2 text-base" />{errors.message && <p id="message-error" className="mt-2 text-sm text-destructive">{errors.message}</p>}</div>
+            <Button type="submit" className="h-11">Review inquiry</Button>
+            {reviewed && <p role="status" className="rounded-md border p-4 text-sm">Your inquiry is ready to review. Nothing has been sent. Your entries are still available above.</p>}
           </form>
-        </div>
-
-        <div className="lg:col-span-2 space-y-3">
-          <InfoRow icon={MapPin} title="888 Mall, Bacolod" body="Plus Cadiz, La Carlota, Dumaguete & Kabankalan." />
-          <InfoRow icon={Phone} title="Call us" body="+63 900 000 0000" />
-          <InfoRow icon={Mail} title="Email" body="hello@iwarehouse.ph" />
-          <InfoRow icon={Clock} title="Store hours" body="Mon-Sun - 9:00 AM - 8:00 PM" />
-
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            <a href="https://m.me/iwarehousebacolod" target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 h-11 rounded-full bg-[#0084ff] hover:opacity-90 text-white font-medium text-sm transition-opacity">
-              <Facebook className="h-4 w-4" /> Messenger
-            </a>
-            <a href="viber://chat?number=%2B639000000000"
-              className="flex items-center justify-center gap-2 h-11 rounded-full bg-[#7360f2] hover:opacity-90 text-white font-medium text-sm transition-opacity">
-              <MessageCircle className="h-4 w-4" /> Viber
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-12 rounded-3xl overflow-hidden aspect-[16/7]">
-        <iframe title="iWarehouse Bacolod location"
-          src="https://www.google.com/maps?q=888+Mall+Bacolod&output=embed"
-          className="w-full h-full" loading="lazy" />
+        </section>
+        <aside className="border-t pt-6"><h2 className="text-2xl">Planning a visit?</h2><p className="mt-4 leading-relaxed text-muted-foreground">The current branch list includes Bacolod, Cadiz, La Carlota, Dumaguete and Kabankalan. Confirm the branch address, opening hours and device availability before travelling.</p><Button asChild variant="outline" className="mt-6 h-11"><Link to="/store">View branch information</Link></Button><div className="mt-8 border-t pt-6"><h3>Bring the useful details</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">For a device inquiry, include the model, storage, preferred colour and budget. For a repair, describe the issue and the device model.</p></div></aside>
       </div>
     </div>
   );
 };
-
-const InfoRow = ({ icon: Icon, title, body }: { icon: React.ElementType; title: string; body: string }) => (
-  <div className="flex gap-3 p-5 rounded-2xl bg-secondary/60">
-    <div className="h-10 w-10 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
-      <Icon className="h-5 w-5 text-accent" />
-    </div>
-    <div>
-      <p className="font-semibold">{title}</p>
-      <p className="text-sm text-muted-foreground">{body}</p>
-    </div>
-  </div>
-);
-
 export default Contact;
