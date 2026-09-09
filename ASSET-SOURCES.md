@@ -22,3 +22,13 @@ License: public/fonts/OFL.txt (SIL Open Font License).
 ## Review references
 Taste Skill: local design-taste-frontend/SKILL.md.
 Web Interface Guidelines: https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md
+
+## Laptop brand tiles
+The laptop brand directory uses promotional category imagery, not stock or availability claims.
+- Lenovo Yoga and ASUS Zenbook: existing local sample photos (see above).
+- Acer Swift X: https://images.acer.com/is/image/acer/Swift-X-SFX14-41G-FP-Backliton-Safari-Gold-01a-1?wid=700
+- ROG Strix: https://rog.asus.com/laptops-group/ ; image https://dlcdnwebimgs.asus.com/gain/0075CD12-E145-49F5-916C-EF86E8691207/w750/h470/fwebp
+- Gigabyte AORUS 17X: https://www.gigabyte.com/Laptop/AORUS-17X--2024/gallery ; image https://static.gigabyte.com/StaticFile/Image/Global/785bff31bf61450958bfaf2692ed329e/Product/39222/png/1000
+- Lenovo, Acer, ASUS and ROG logos: Simple Icons via https://cdn.simpleicons.org/ (white variants, original proportions retained).
+- Gigabyte wordmark: https://commons.wikimedia.org/wiki/File:Gigabyte_Technology_logo_20080107.svg (PD-textlogo; trademark retained).
+Manufacturer imagery is used for this design proof of concept. Replace with approved iWarehouse merchandising assets before a public commercial launch.

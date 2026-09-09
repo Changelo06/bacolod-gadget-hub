@@ -4,6 +4,7 @@ import { Smartphone, Tablet, Laptop, Monitor, Computer, Keyboard, Headphones, Re
 import { ProductCard } from "@/components/ProductCard";
 import { CatalogState } from "@/components/CatalogState";
 import { PromoCarousel } from "@/components/PromoCarousel";
+import { LaptopBrands } from "@/components/LaptopBrands";
 import { useProducts } from "@/hooks/useProducts";
 import { DEMO_MODE, filterCatalog } from "@/lib/catalog";
 import { categoryBrands, categoryProducts, categoryUrl, RETAIL_CATEGORIES } from "@/lib/retail";
@@ -31,7 +32,7 @@ const Index = () => {
       <ProductShelf title="New arrivals" note={DEMO_MODE ? "Sample lineup for the new-arrivals collection" : "New listings will appear here once confirmed."} products={arrivals} href="/shop" />
       <div className="brand-promos"><Link to="/shop?category=tablets&brand=Apple" className="brand-promo"><div><span>Apple tablets</span><h2>A lighter way<br />to do more.</h2><p>Explore iPad</p></div><img src="/images/device-159.webp" alt="" width="280" height="280" loading="lazy" /></Link><Link to="/shop?category=laptops&brand=Asus" className="brand-promo"><div><span>ASUS laptops</span><h2>Space for<br />your next idea.</h2><p>Explore ASUS</p></div><img src="/images/device-79.webp" alt="" width="280" height="280" loading="lazy" /></Link></div>
       <BrandShelf title="Find your next phone" category="phones" products={products} />
-      <BrandShelf title="Laptops by brand" category="laptops" products={products} />
+      <LaptopBrands />
       <ProductShelf title="More ways to work & play" products={products.filter((product) => ["tablets", "audio"].some((category) => categoryProducts([product], category).length))} href="/shop" />
     </>}
     <section className="home-visit"><div><h2>Closer to you.</h2><p>Visit an iWarehouse branch in Negros.</p></div><Link to="/store" className="quiet-link">Find a branch</Link></section>
