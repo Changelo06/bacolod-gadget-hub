@@ -14,7 +14,7 @@ const Shop = () => {
   useEffect(() => { setDraft(query); },[query]);
   const {data:products = [],isLoading,isError,isFetching,refetch} = useProducts(undefined,100);
   const sorted = useMemo(() => filterCatalog(products,params),[products,params]);
-  const brands = Array.from(new Set(products.map((item) => item.node.vendor).filter(Boolean))).sort();
+  const brands = Array.from(new Set([...products.map((item) => item.node.vendor), params.get("brand")].filter(Boolean))).sort();
   const change = (key:string,value:string) => { const next = new URLSearchParams(params); if(value) next.set(key,value); else next.delete(key); if(key === "category") next.delete("q"); setParams(next); };
   const filtered = ["q","brand","category","budget","condition"].some((key) => params.has(key));
   return <div className="container section-space catalog-page">

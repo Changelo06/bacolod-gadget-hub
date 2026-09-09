@@ -7,7 +7,10 @@ export const CATEGORIES = [
   { id: "tablets", label: "Tablets", terms: "tablet ipad tab" },
   { id: "audio", label: "Audio", terms: "earphones headphones airpods beats speaker" },
   { id: "accessories", label: "Accessories", terms: "accessories accessory charger case cable watch" },
-  { id: "computers", label: "PCs & displays", terms: "desktop monitor tv" },
+  { id: "monitors", label: "Monitors", terms: "monitor display tv" },
+  { id: "pcs", label: "PC", terms: "desktop pc workstation" },
+  { id: "peripherals", label: "Peripherals", terms: "keyboard mouse webcam controller printer" },
+  { id: "others", label: "Others", terms: "" },
 ];
 export const BUDGETS = [
   { id: "10000", label: "Under ₱10,000", max: 10000 },
@@ -23,7 +26,7 @@ export function catalogCategory(product: ShopifyProduct) {
   if (type === "laptops" || type === "tablets") return type;
   const text = `${product.node.title} ${type ?? ""}`.toLowerCase();
   const categories = [...CATEGORIES].sort((a, b) => Number(b.id === "audio") - Number(a.id === "audio"));
-  return categories.find((item) => item.terms.split(" ").some((term) => new RegExp(`\\b${term}s?\\b`, "i").test(text)))?.id;
+  return categories.find((item) => item.terms && item.terms.split(" ").some((term) => new RegExp(`\\b${term}s?\\b`, "i").test(text)))?.id ?? "others";
 }
 export function filterCatalog(products: ShopifyProduct[], params: URLSearchParams) {
   const query = (params.get("q") ?? "").trim().toLowerCase();
@@ -34,7 +37,8 @@ export function filterCatalog(products: ShopifyProduct[], params: URLSearchParam
   const condition = params.get("condition");
   const filtered = products.filter((product) => {
     const text = `${product.node.title} ${product.node.vendor ?? ""} ${product.node.productType ?? ""}`.toLowerCase();
-    if (category && catalogCategory(product) !== category.id) return false;
+    if ((params.get("category") === "computers" || legacyCategory === "computers") && !["pcs", "monitors"].includes(catalogCategory(product))) return false;
+    if (category && (category.id === "others" ? !["others", "audio", "accessories"].includes(catalogCategory(product)) : catalogCategory(product) !== category.id)) return false;
     if (query && !legacyCategory && !query.split(/\s+/).every((term) => text.includes(term))) return false;
     if (brand && product.node.vendor?.toLowerCase() !== brand) return false;
     if (budget && (product.node.priceRange.minVariantPrice.currencyCode !== "PHP" || Number(product.node.priceRange.minVariantPrice.amount) >= budget.max)) return false;

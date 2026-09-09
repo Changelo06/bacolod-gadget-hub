@@ -25,4 +25,13 @@ describe("Catalog filters", () => {
   it("matches a brand and model together", () => {
     expect(filterCatalog(products,new URLSearchParams("q=samsung+tab")).map((p)=>p.node.handle)).toEqual(["sample-160"]);
   });
+  it("separates monitor, PC and peripheral categories while preserving the old combined URL", () => {
+    const fixtures = ["Samsung monitor", "Lenovo desktop", "Logitech keyboard"].map((title) => ({ node: { ...products[0].node, title, productType: "" } }));
+    expect(fixtures.map(catalogCategory)).toEqual(["monitors", "pcs", "peripherals"]);
+    expect(filterCatalog(fixtures, new URLSearchParams("category=computers"))).toHaveLength(2);
+    expect(filterCatalog(fixtures, new URLSearchParams("category=monitors"))).toEqual([fixtures[0]]);
+  });
+  it("includes audio in the Others browsing destination", () => {
+    expect(filterCatalog(products, new URLSearchParams("category=others&brand=Beats"))).toHaveLength(1);
+  });
 });

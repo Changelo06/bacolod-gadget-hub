@@ -1,45 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Search, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { Input } from "@/components/ui/input";
 import { useProducts } from "@/hooks/useProducts";
 
-const NAV = [
-  { to: "/shop", label: "Shop devices" },
-  { to: "/cpo", label: "Pre-owned" },
-  { to: "/store", label: "Our branches" },
-  { to: "/contact", label: "Contact" },
-];
-export const Header = () => {
-  const [searchExpanded, setSearchExpanded] = useState(false);
-  return (
-    <header className="site-header">
-      <div className="container retail-header" data-search-open={searchExpanded}>
-        <Logo />
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {NAV.map((item) => (
-            <NavLink key={item.to} to={item.to} className={({ isActive }) => "header-link" + (isActive ? " is-active" : "")}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-        <div id="header-search" className="header-search"><SearchBar /></div>
-        <button
-          type="button"
-          className="header-search-toggle"
-          aria-label={searchExpanded ? "Close search" : "Open search"}
-          aria-expanded={searchExpanded}
-          aria-controls="header-search"
-          onClick={() => setSearchExpanded((value) => !value)}
-        >
-          {searchExpanded ? <X aria-hidden="true" size={20} /> : <Search aria-hidden="true" size={20} />}
-        </button>
-      </div>
-    </header>
-  );
-};
-function SearchBar() {
+export const Header = () => (
+  <header className="site-header search-led-header">
+    <div className="container search-led-row">
+      <Logo />
+      <div className="search-led-field"><SearchBar /></div>
+    </div>
+  </header>
+);function SearchBar() {
   const [query, setQuery] = useState("");
   const [debounced, setDebounced] = useState("");
   const [open, setOpen] = useState(false);
