@@ -1,7 +1,7 @@
 # iWarehouse polish checklist
 
 ## Direction
-Multi-brand retail for Philippine shoppers. Design variance 4/10, motion 2/10, density 5/10.
+Multi-brand retail for Philippine shoppers. Design variance 4/10, motion 2/10, density 2/10.
 Retain black, white and orange brand identity; use ordinary retail controls with the existing component system. Use sample device photography rather than generated brand-specific products.
 
 ## Implemented
@@ -17,11 +17,11 @@ Retain black, white and orange brand identity; use ordinary retail controls with
 - [x] Sample catalog is explicitly marked; no checkout or payment is enabled.
 - [x] Mobile layouts, 44px controls, visible focus, skip link and reduced-motion styles.
 - [x] Self-hosted font and local WebP images with reserved dimensions.
-- [x] System dark-mode tokens and high-contrast control text.
+- [x] Consistent light storefront with black brand header/footer.
 - [x] Branch selection is URL-based, with unverified contact details labelled honestly.
 
 ## Container rules
-1320px maximum width, fluid side gutters, 40-64px section spacing. Product grids: four across at home, three beside desktop catalog filters, two on mobile. On narrow screens the header/search becomes two rows and stops sticking; filters move above results. The product detail view becomes a single column.
+1320px maximum width with fluid gutters. Home has three sections: introduction, four featured devices, branch invitation. Section spacing grows from 48px on mobile to 88-100px on desktop. No home brand wall, budget panels, side navigation drawer or decorative arrows. Desktop header stays on one row; mobile links occupy one deliberate row below the logo. Search expands inline on smaller screens. Product grids use four columns on wide home screens and two on mobile. Catalog filters stay in the catalog.
 
 ## Business and brand confirmation
 - [ ] Supply final logo variants and approved media elements.
@@ -37,7 +37,7 @@ Retain black, white and orange brand identity; use ordinary retail controls with
 ## Manual acceptance pending
 - [ ] Review layout at 360, 390, 768, 1024 and 1440px, including long names.
 - [ ] Check 200% zoom, keyboard navigation, dialog focus return and screen reader output.
-- [ ] Review system light/dark modes, focus visibility and colour contrast.
+- [ ] Complete contrast and focus visibility audit.
 - [ ] Walk through category → brand → budget → product → inquiry → branch.
 - [ ] Verify Back/Forward, refreshing and shared URLs.
 - [ ] Test real Shopify failures, slow requests, empty catalog and image failures.
@@ -51,4 +51,4 @@ Automated checks cover filter combinations, numeric budget sorting, audio/phone 
 Passing automated checks does not complete the manual or business checks above.
 The repository has existing lint issues in generated command/textarea components and the legacy cart store; these are separate from the redesigned customer flow.
 
-Final automated results: production build passed; TypeScript passed; 10 tests passed; focused lint passed; whitespace checks passed. Full repository lint still has existing generated-component and legacy-cart issues. Manual browser/device checks remain unchecked.
+Final automated results: production build passed; TypeScript passed; 10 tests passed; focused lint passed; whitespace checks passed. Full repository lint still has existing generated-component and legacy-cart issues. Browser checks confirmed the simplified home at 390px and intermediate width, no horizontal overflow at 390px and 1440px, aligned desktop header, inline search expansion and correct search results. The broader manual acceptance checks remain pending.

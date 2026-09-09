@@ -1,31 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Menu, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Logo } from "./Logo";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription, SheetClose } from "@/components/ui/sheet";
 import { useProducts } from "@/hooks/useProducts";
 
-const NAV = [{ to: "/shop", label: "Shop devices" }, { to: "/cpo", label: "Pre-owned" }, { to: "/store", label: "Our branches" }, { to: "/contact", label: "Contact" }];
-export const Header = () => (
-  <header className="site-header">
-    <div className="container retail-header">
-      <Logo />
-      <div className="header-search"><SearchBar /></div>
-      <nav className="desktop-nav" aria-label="Main navigation">
-        {NAV.map((item) => <NavLink key={item.to} to={item.to} className={({ isActive }) => 'header-link' + (isActive ? ' is-active' : '')}>{item.label}</NavLink>)}
-      </nav>
-      <Sheet>
-        <SheetTrigger asChild><Button variant="ghost" size="icon" className="mobile-menu h-11 w-11 hover:bg-white/10 hover:text-white" aria-label="Open navigation"><Menu aria-hidden="true" className="h-5 w-5" /></Button></SheetTrigger>
-        <SheetContent side="right" className="w-[min(340px,100vw)] overscroll-contain">
-          <SheetTitle>iWarehouse</SheetTitle><SheetDescription>Browse devices or plan your visit.</SheetDescription>
-          <nav className="mt-8 flex flex-col gap-2" aria-label="Mobile navigation">{NAV.map((item) => <SheetClose key={item.to} asChild><NavLink to={item.to} className="min-h-11 border-b py-3 text-lg font-medium">{item.label}</NavLink></SheetClose>)}</nav>
-        </SheetContent>
-      </Sheet>
-    </div>
-  </header>
-);
+const NAV = [
+  { to: "/shop", label: "Shop devices" },
+  { to: "/cpo", label: "Pre-owned" },
+  { to: "/store", label: "Our branches" },
+  { to: "/contact", label: "Contact" },
+];
+export const Header = () => {
+  const [searchExpanded, setSearchExpanded] = useState(false);
+  return (
+    <header className="site-header">
+      <div className="container retail-header" data-search-open={searchExpanded}>
+        <Logo />
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {NAV.map((item) => (
+            <NavLink key={item.to} to={item.to} className={({ isActive }) => "header-link" + (isActive ? " is-active" : "")}>
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+        <div id="header-search" className="header-search"><SearchBar /></div>
+        <button
+          type="button"
+          className="header-search-toggle"
+          aria-label={searchExpanded ? "Close search" : "Open search"}
+          aria-expanded={searchExpanded}
+          aria-controls="header-search"
+          onClick={() => setSearchExpanded((value) => !value)}
+        >
+          {searchExpanded ? <X aria-hidden="true" size={20} /> : <Search aria-hidden="true" size={20} />}
+        </button>
+      </div>
+    </header>
+  );
+};
 function SearchBar() {
   const [query, setQuery] = useState("");
   const [debounced, setDebounced] = useState("");

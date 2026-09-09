@@ -1,26 +1,56 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Smartphone, Laptop, Tablet, Monitor, Headphones, Cable, MapPin, CreditCard, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
 import { CatalogState } from "@/components/CatalogState";
 import { useProducts } from "@/hooks/useProducts";
-import { BUDGETS, CATEGORIES, DEMO_MODE } from "@/lib/catalog";
+import { catalogCategory } from "@/lib/catalog";
 
-const ICONS = [Smartphone, Laptop, Tablet, Headphones, Cable, Monitor];
 const Index = () => {
   const { data: products = [], isLoading, isError, refetch, isFetching } = useProducts(undefined, 100);
-  const brands = Array.from(new Set(products.map((item) => item.node.vendor).filter(Boolean))).sort();
-  const heroDevices = [products.find((p) => p.node.vendor === "Asus"), products.find((p) => p.node.vendor === "Samsung"), products.find((p) => p.node.vendor === "Realme")].filter(Boolean);
-  return <div>
-    <section className="container retail-hero">
-      <div className="hero-copy"><p className="eyebrow">More brands. More ways to choose.</p><h1>Tech for your life.<br /><span>At your budget.</span></h1><p className="hero-description">Find phones, laptops and everyday gear from different brands. Explore online, then check with your local branch.</p><Button asChild size="lg" className="primary-action"><Link to="/shop">Explore devices <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></Button></div>
-      <div className="hero-devices" aria-label="A selection of devices from different brands">{heroDevices.map((p, i) => p && <Link key={p.node.id} to={'/product/' + p.node.handle} className={'hero-device hero-device-' + i} aria-label={'View ' + p.node.title}><img src={p.node.images.edges[0]?.node.url} alt={p.node.title} width="600" height="600" {...{ fetchpriority: i === 0 ? "high" : "auto" }} /></Link>)}</div>
-    </section>
-    <nav className="container category-section" aria-label="Shop by category"><div className="retail-categories">{CATEGORIES.map((category,i) => { const Icon = ICONS[i]; return <Link to={'/shop?category=' + category.id} key={category.id}><Icon aria-hidden="true" strokeWidth={1.5} /><span>{category.label}</span><ArrowRight aria-hidden="true" className="category-arrow" /></Link>; })}</div></nav>
-    <section className="container brands-section" aria-labelledby="brands-heading"><div className="compact-heading"><h2 id="brands-heading">Find your brand</h2><p>{DEMO_MODE ? "Explore the brands in this sample catalog." : "Explore brands in the current catalog."}</p></div><div className="brand-browser">{brands.map((brand) => <Link key={brand} to={'/shop?brand=' + encodeURIComponent(brand!)} className="brand-choice"><span translate="no">{brand}</span><ArrowRight aria-hidden="true" className="h-4 w-4" /></Link>)}</div></section>
-    <section className="container section-space" aria-labelledby="devices-title"><div className="section-heading"><div><h2 id="devices-title">Different brands. One place.</h2><p className="mt-3 text-muted-foreground">Compare your options, from everyday essentials to your next upgrade.</p></div><Link to="/shop" className="text-link">View all devices <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></div>{isLoading ? <CatalogState loading /> : isError ? <CatalogState error onRetry={() => refetch()} retrying={isFetching} /> : products.length === 0 ? <CatalogState /> : <div className="product-grid">{products.slice(0,8).map((product) => <ProductCard key={product.node.id} product={product} />)}</div>}</section>
-    <section className="container budget-section" aria-labelledby="budget-title"><div><h2 id="budget-title">Start with your budget.</h2><p className="mt-3 text-muted-foreground">Narrow your options by the total device price in pesos.</p></div><div className="budget-links">{BUDGETS.map((budget) => <Link key={budget.id} to={'/shop?budget=' + budget.id}>{budget.label}<ArrowRight aria-hidden="true" className="h-5 w-5" /></Link>)}<Link to="/shop">See all price ranges <ArrowRight aria-hidden="true" className="h-5 w-5" /></Link></div></section>
-    <section className="container section-space" aria-labelledby="help-title"><h2 id="help-title" className="section-title">A little help before you buy.</h2><div className="buying-guide"><article><CreditCard aria-hidden="true" /><h3>Ask about payment options</h3><p>Cash, GCash, cards or installments? Confirm accepted methods, fees and the total payable with your branch.</p><Link to="/store" className="text-link">Find a branch <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></article><article><BadgeCheck aria-hidden="true" /><h3>Considering pre-owned?</h3><p>Check the actual unit, battery condition, included accessories and warranty before choosing.</p><Link to="/cpo" className="text-link">Explore pre-owned <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></article><article><MapPin aria-hidden="true" /><h3>Make the trip count</h3><p>Ask about your exact model and preferred branch. Online listings do not confirm in-store stock.</p><Link to="/contact" className="text-link">Prepare an inquiry <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link></article></div></section>
-  </div>;
+  const featured = ["phones", "laptops", "tablets", "audio"]
+    .map((category) => products.find((product) => catalogCategory(product) === category))
+    .filter((product) => product !== undefined);
+  const heroImage = products.find((product) => catalogCategory(product) === "laptops")?.node.images.edges[0]?.node;
+
+  return (
+    <div className="home-page">
+      <section className="container home-welcome">
+        <div className="welcome-copy">
+          <h1>Technology<br />for everyone.</h1>
+          <p>Phones, laptops and everyday essentials.</p>
+          <Button asChild size="lg" className="welcome-action">
+            <Link to="/shop">Browse devices</Link>
+          </Button>
+        </div>
+        {heroImage && (
+          <div className="welcome-image">
+            <img src={heroImage.url} alt="A laptop from the sample device collection" width="600" height="600" {...{ fetchpriority: "high" }} />
+          </div>
+        )}
+      </section>
+
+      <section className="container home-collection" aria-labelledby="collection-title">
+        <div className="collection-heading">
+          <h2 id="collection-title">Find your everyday.</h2>
+          <Link to="/shop" className="quiet-link">View collection</Link>
+        </div>
+        {isLoading ? <CatalogState loading /> : isError ? (
+          <CatalogState error onRetry={() => refetch()} retrying={isFetching} />
+        ) : featured.length === 0 ? <CatalogState /> : (
+          <div className="home-product-grid">
+            {featured.map((product) => <ProductCard key={product.node.id} product={product} compact />)}
+          </div>
+        )}
+      </section>
+
+      <section className="container home-visit" aria-labelledby="visit-title">
+        <div>
+          <h2 id="visit-title">Closer to you.</h2>
+          <p>Visit an iWarehouse branch in Negros.</p>
+        </div>
+        <Link to="/store" className="quiet-link">Find a branch</Link>
+      </section>
+    </div>
+  );
 };
 export default Index;
