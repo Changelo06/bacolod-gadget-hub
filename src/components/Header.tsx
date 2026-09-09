@@ -10,9 +10,11 @@ export const Header = () => (
     <div className="container search-led-row">
       <Logo />
       <div className="search-led-field"><SearchBar /></div>
+      <Link to="/contact" className="header-support">Customer support</Link>
     </div>
   </header>
-);function SearchBar() {
+);
+function SearchBar() {
   const [query, setQuery] = useState("");
   const [debounced, setDebounced] = useState("");
   const [open, setOpen] = useState(false);
