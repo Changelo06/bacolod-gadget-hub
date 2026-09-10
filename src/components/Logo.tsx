@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import logo from "@/assets/iwarehouse-logo.png";
 
 export const Logo = ({ variant = "dark" }: { variant?: "dark" | "light" }) => (
-  <Link to="/" className={'brand-logo brand-logo-' + variant} aria-label="iWarehouse home">
-    <img src={logo} alt="iWarehouse" width="864" height="864" />
+  <Link to="/" className={'concept-brand concept-brand-' + variant} aria-label="iWherehouse home">
+    <span className="concept-brand-mark" aria-hidden="true"><img src="/iwherehouse-monogram.png" alt="" width="1280" height="1280" /></span>
+    <span className="concept-brand-name"><span>i</span>Wherehouse</span>
   </Link>
 );

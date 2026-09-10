@@ -16,7 +16,7 @@ export const Layout = () => {
       <main id="main-content" tabIndex={-1} className="flex-1">
         <Outlet />
       </main>
-      {DEMO_MODE && <div className="preview-notice">Design preview: sample products, promotions and prices. No orders or payments are taken.</div>}
+      {DEMO_MODE && <div className="preview-notice">iWherehouse is an independent design mockup. Sample products and prices; no orders or payments.</div>}
       <Footer />
     </div>
   );

@@ -32,3 +32,6 @@ The laptop brand directory uses promotional category imagery, not stock or avail
 - Lenovo, Acer, ASUS and ROG logos: Simple Icons via https://cdn.simpleicons.org/ (white variants, original proportions retained).
 - Gigabyte wordmark: https://commons.wikimedia.org/wiki/File:Gigabyte_Technology_logo_20080107.svg (PD-textlogo; trademark retained).
 Manufacturer imagery is used for this design proof of concept. Replace with approved iWarehouse merchandising assets before a public commercial launch.
+
+## iWherehouse concept identity
+The orange-and-white integrated iW monogram (`public/iwherehouse-monogram.png`) was generated for this project and selected by the user. The original artwork is preserved; CSS frames it in the header and footer. iWherehouse is an independent student mockup inspired by iWarehouse, not an official storefront.

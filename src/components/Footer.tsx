@@ -7,7 +7,7 @@ export const Footer = () => (
       <div className="footer-directory">
         <div className="footer-brand">
           <Logo variant="light" />
-          <p>Technology for everyone.<br />Find your everyday at iWarehouse.</p>
+          <p>An independent student concept inspired by iWarehouse. Not affiliated with or endorsed by iWarehouse.</p>
         </div>
         <nav className="footer-column" aria-labelledby="footer-shop">
           <h2 id="footer-shop">Shop</h2>
@@ -40,7 +40,7 @@ export const Footer = () => (
         </nav>
       </div>
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} iWarehouse. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} iWherehouse · Student design concept.</p>
         <p>Design proof of concept</p>
       </div>
     </div>

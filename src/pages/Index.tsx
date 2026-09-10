@@ -35,7 +35,7 @@ const Index = () => {
       <LaptopBrands />
       <ProductShelf title="More ways to work & play" products={products.filter((product) => ["tablets", "audio"].some((category) => categoryProducts([product], category).length))} href="/shop" />
     </>}
-    <section className="home-visit"><div><h2>Closer to you.</h2><p>Visit an iWarehouse branch in Negros.</p></div><Link to="/store" className="quiet-link">Find a branch</Link></section>
+    <section className="home-visit"><div><h2>Closer to you.</h2><p>Explore our sample branch directory for Negros.</p></div><Link to="/store" className="quiet-link">Find a branch</Link></section>
   </div></div>;
 };
 export default Index;
